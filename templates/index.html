@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>PDF Viewer and Search</title>
+    <title>PDF Uploader</title>
     <style>
         body {
             font-family: sans-serif;
@@ -110,50 +110,6 @@
             margin-top: 10px;
         }
 
-        #search-container {
-            margin-top: 20px;
-            text-align: center;
-        }
-
-        #search-input {
-            width: 60%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-            margin-bottom: 10px;
-        }
-
-        #search-button {
-            background-color: #007bff;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        #search-button:hover {
-            background-color: #0056b3;
-        }
-
-        #search-results {
-            margin-top: 20px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            background-color: #f9f9f9;
-        }
-
-        #search-results ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        #search-results li {
-            margin-bottom: 5px;
-        }
-
     </style>
 </head>
 <body>
@@ -189,67 +145,11 @@
             {% endif %}
         </div>
 
-         <div id="search-container">
-            <h2>Search PDFs</h2>
-            <input type="text" id="search-input" placeholder="Enter your search query">
-            <button id="search-button">Search</button>
-            <div id="search-results">
-                <h3>Search Results:</h3>
-                <ul id="results-list"></ul>
-            </div>
-        </div>
-
     </div>
 
     <script>
         document.getElementById('btn1').addEventListener('click', function() {
-            // Display search input and button
-            document.getElementById('search-container').style.display = 'block';
-        });
-
-        document.getElementById('search-button').addEventListener('click', function() {
-            const query = document.getElementById('search-input').value;
-            if (query) {
-                fetch('/search_pdf', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ query: query })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    const resultsList = document.getElementById('results-list');
-                    resultsList.innerHTML = ''; // Clear previous results
-
-                    if (data.results && data.results.length > 0) {
-                        data.results.forEach(result => {
-                            const li = document.createElement('li');
-                            li.textContent = result;
-                            resultsList.appendChild(li);
-                        });
-                    } else if (data.error) {
-                        const li = document.createElement('li');
-                        li.textContent = 'Error: ' + data.error;
-                        resultsList.appendChild(li);
-                    }
-                     else {
-                        const li = document.createElement('li');
-                        li.textContent = 'No results found.';
-                        resultsList.appendChild(li);
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    const resultsList = document.getElementById('results-list');
-                    resultsList.innerHTML = '';
-                    const li = document.createElement('li');
-                    li.textContent = 'An error occurred while searching.';
-                    resultsList.appendChild(li);
-                });
-            } else {
-                alert('Please enter a search query.');
-            }
+            window.location.href = '/search_pdf_page'; // Redirect to search page
         });
     </script>
 </body>
