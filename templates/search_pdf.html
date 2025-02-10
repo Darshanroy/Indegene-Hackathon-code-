@@ -67,6 +67,13 @@
         #search-results li {
             margin-bottom: 5px;
         }
+        /* Style for the PDF container */
+        .pdf-container {
+            width: 100%; /* Adjust the width as needed */
+            height: 500px; /* Adjust the height as needed */
+            border: 1px solid #ccc;
+            margin-top: 10px;
+        }
 
 
     </style>
@@ -104,18 +111,37 @@
                     const resultsList = document.getElementById('results-list');
                     resultsList.innerHTML = ''; // Clear previous results
 
-                    if (data.results && data.results.length > 0) {
+                   if (data.results && data.results.length > 0) {
                         data.results.forEach(result => {
                             const li = document.createElement('li');
-                            li.textContent = result;
+                            //File Name
+                            const filename = document.createElement('span');
+                            filename.textContent = `Filename: ${result.filename} `;
+                            li.appendChild(filename);
+                             // Create Download Link
+                            const downloadLink = document.createElement('a');
+                            downloadLink.href = result.download_link;
+                            downloadLink.textContent = 'Download';
+                            downloadLink.download = result.filename; // Set the download attribute
+                            li.appendChild(document.createElement('br')); //Line Break
+                            li.appendChild(downloadLink);
+
+                            //PDF Embeded
+                            const pdfEmbed = document.createElement('iframe');
+                            pdfEmbed.src = result.embed_link;
+                            pdfEmbed.classList.add('pdf-container');
+                            li.appendChild(document.createElement('br')); //Line Break
+                            li.appendChild(pdfEmbed);
+
                             resultsList.appendChild(li);
+                            resultsList.appendChild(document.createElement('br'));  // Add line break between each item
+
                         });
                     } else if (data.error) {
                         const li = document.createElement('li');
                         li.textContent = 'Error: ' + data.error;
                         resultsList.appendChild(li);
-                    }
-                     else {
+                    } else {
                         const li = document.createElement('li');
                         li.textContent = 'No results found.';
                         resultsList.appendChild(li);

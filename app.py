@@ -1,7 +1,7 @@
-from flask import Flask, render_template, request, redirect, url_for, jsonify
+from flask import Flask, render_template, request, redirect, url_for, jsonify, send_from_directory
 import os
 from pymongo import MongoClient
-#from werkzeug.utils import secure_filename  # Removed
+import re  # Import for re
 import fitz  # PyMuPDF
 from sentence_transformers import SentenceTransformer
 import faiss
@@ -9,7 +9,6 @@ import numpy as np
 import pickle
 from huggingface_hub import login
 from flask_cors import CORS
-import re # Import for re
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
@@ -189,13 +188,15 @@ def retrieve_similar_pdfs(query, index_instance, pdf_files_list, model_instance,
     return [pdf_files_list[i] for i in indices[0]]
 
 
-def process_search_request(query, index_instance, pdf_files_list, model_instance):
+def process_search_request(query, index_instance, pdf_files_list, model_instance, upload_folder):
     """
-    Processes a search request, retrieves similar PDFs,
-    and returns a JSON-like response.
+    Processes a search request, retrieves similar PDFs, and returns:
+    - Filename
+    - Download Link
+    - Embed link
     """
 
-    # Extract Query from Request (simulated)
+    # Extract Query from Request
     print(f"Query received: {query}")
 
     # Generate Embedding for Query
@@ -205,9 +206,19 @@ def process_search_request(query, index_instance, pdf_files_list, model_instance
         print(f"Error during search: {e}")
         return {"error": "An error occurred during the search."}
 
-    # Return PDF Filenames as JSON Response (simulated)
-    print(f"Found similar PDFs: {similar_pdfs}")
-    return {"results": similar_pdfs}
+    # Create response with filename, download link, and embed link for each PDF
+    results = []
+    for filename in similar_pdfs:
+        download_link = url_for('download_pdf', filename=filename, _external=True)  # Generates the fully qualified URL
+        embed_link = url_for('view_pdf', filename=filename, _external=True)  # Create an URL endpoint to render the PDF
+        results.append({
+            "filename": filename,
+            "download_link": download_link,
+            "embed_link": embed_link
+        })
+
+    print(f"Found similar PDFs: {results}")
+    return {"results": results}
 
 
 # --- Flask Routes ---
@@ -283,11 +294,24 @@ def search_pdf():
         return jsonify({"error": "Query is required"}), 400
 
     try:
-        response = process_search_request(query, index, pdf_files, model)
-        return jsonify(response)  # The processed response with similar PDF names
+        # Pass upload_folder
+        response = process_search_request(query, index, pdf_files, model, app.config['UPLOAD_FOLDER'])
+        return jsonify(response)  # The processed response with filenames, download, and embed link
     except Exception as e:
         print(f"Error during search: {e}")
         return jsonify({"error": "An error occurred during the search."}), 500
+
+
+@app.route('/download/<filename>')
+def download_pdf(filename):
+    """Allows users to download the PDF file."""
+    return send_from_directory(app.config['UPLOAD_FOLDER'], filename, as_attachment=True)
+
+
+@app.route('/view/<filename>')
+def view_pdf(filename):
+    """Serves the PDF to be embedded in the HTML."""
+    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
 
 # --- Initialization ---
