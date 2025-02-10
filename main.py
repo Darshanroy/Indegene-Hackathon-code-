@@ -54,13 +54,6 @@ def load_index_and_files():
         index = faiss.IndexFlatL2(dimension)  # Create a new index
         pdf_files = []  # Start with an empty list of files
 
-def save_index_and_files():
-    global index, pdf_files
-    faiss.write_index(index, INDEX_PATH)
-    with open(PDF_FILES_PATH, 'wb') as f:
-        pickle.dump(pdf_files, f)
-    print("Saved FAISS index and PDF files to disk.")
-
 
 def extract_text_from_pdf(pdf_path):
     try:

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PDF Upload</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        #pdf-form {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        #pdf-form label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        #pdf-form input[type="file"] {
+            width: 70%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        #pdf-form button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        #pdf-form button:hover {
+            background-color: #3e8e41;
+        }
+
+        .error-message {
+            color: red;
+            margin-top: 10px;
+        }
+
+        #file-list {
+            margin-top: 20px;
+            border-top: 1px solid #ccc;
+            padding-top: 10px;
+        }
+
+        #file-list ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #file-list li {
+            margin-bottom: 5px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Upload PDF Files</h1>
+        <form id="pdf-form" action="/upload" method="post" enctype="multipart/form-data">
+            <label for="pdf_files">Select PDF Files:</label>
+            <input type="file" id="pdf_files" name="pdf_files" accept=".pdf" multiple required>
+            <button type="submit">Upload</button>
+        </form>
+
+        {% if file_paths %}
+        <div id="file-list">
+            <h3>Uploaded Files:</h3>
+            <ul>
+                {% for file_path in file_paths %}
+                <li>{{ file_path }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+
+        {% if error_message %}
+        <div class="error-message">
+            {{ error_message }}
+        </div>
+        {% endif %}
+
+        <a href="/search_page">Search PDFs using Query</a> <!-- Link to search page -->
+    </div>
+</body>
+</html>
