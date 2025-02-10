@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PDF Viewer and Options</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        #pdf-form {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        #pdf-form label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        #pdf-form input[type="file"] {
+            width: 70%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        #pdf-form button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        #pdf-form button:hover {
+            background-color: #3e8e41;
+        }
+
+        .buttons-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .option-button, .clear-button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .option-button {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .option-button:hover {
+            background-color: #0056b3;
+        }
+
+        .clear-button {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .clear-button:hover {
+            background-color: #c82333;
+        }
+
+        #file-list {
+            margin-top: 20px;
+            border-top: 1px solid #ccc;
+            padding-top: 10px;
+        }
+
+        #file-list ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #file-list li {
+            margin-bottom: 5px;
+        }
+
+        .error-message {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Upload PDF Files</h1>
+        <form id="pdf-form" action="/" method="post" enctype="multipart/form-data">
+            <label for="pdf_files">Select PDF Files:</label>
+            <input type="file" id="pdf_files" name="pdf_files" accept=".pdf" multiple required>
+            <button type="submit">Upload</button>
+        </form>
+
+        <div class="buttons-container">
+            <button class="option-button" id="btn1">Button 1</button>
+            <button class="option-button" id="btn2">Button 2</button>
+            <button class="option-button" id="btn3">Button 3</button>
+            <button class="clear-button">Clear</button>
+        </div>
+
+        {% if error_message %}
+        <div class="error-message">
+            {{ error_message }}
+        </div>
+        {% endif %}
+
+        <div id="file-list">
+            {% if file_paths %}
+            <h3>Uploaded Files:</h3>
+            <ul>
+                {% for file_path in file_paths %}
+                <li>{{ file_path }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('btn1').addEventListener('click', function() {
+            window.location.href = 'https://www.example.com';
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+flask
+PyMuPDF
+sentence-transformers
+faiss-cpu
+flask-cors
+pymongo
+langchain
+langchain_community
+bertopic
