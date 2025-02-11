@@ -1,224 +1,266 @@
+from flask import Flask, request, jsonify, render_template, send_from_directory
 import os
 import json
-import fitz  # PyMuPDF for PDF text extraction
-import faiss
-import numpy as np
-import pymongo
-from flask import Flask, request, jsonify, send_from_directory
-from flask_cors import CORS
-from sentence_transformers import SentenceTransformer
-from langchain_groq import ChatGroq
-# from langchain.embeddings import HuggingFaceEmbeddings
-from langchain_huggingface import HuggingFaceEmbeddings
+from langchain_community.document_loaders import PyPDFDirectoryLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from bertopic import BERTopic
+from langchain_groq import ChatGroq
+# from langchain_huggingface.embeddings import HuggingFaceEmbeddings  # Incorrect
+# from langchain_huggingface import HuggingFaceEndpointEmbeddings  # Incorrect
+from langchain_cohere import CohereEmbeddings  # Correct import
+from langchain_chroma import Chroma
+from langchain_core.chat_history import BaseChatMessageHistory
+from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
+from langchain_core.runnables.history import RunnableWithMessageHistory
+from langchain_community.chat_message_histories import ChatMessageHistory
+from langchain.chains import create_history_aware_retriever, create_retrieval_chain
+from langchain.chains.combine_documents import create_stuff_documents_chain
+from dotenv import load_dotenv
 
-# Configuration Constants
-UPLOAD_FOLDER = "./pdfs"
-MONGODB_URI = "mongodb://localhost:27017/"
-DATABASE_NAME = "pdf_db"
-COLLECTION_NAME = "pdf_metadata"
-FAISS_INDEX_PATH = "pdf_index.faiss"
-EMBEDDING_MODEL_NAME = "all-MiniLM-L6-v2"
-GROQ_MODEL_NAME = "mixtral-8x7b"
-GROQ_API_KEY = "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"  #Replace with actual API Key
-SUMMARY_LENGTH = 500
+# Load environment variables from .env file
+load_dotenv()
 
-# Initialize Flask app
+# Get the Hugging Face token and Groq API key from environment variables
+# HF_TOKEN = os.getenv("HF_TOKEN") #No longer needed
+COHERE_API_KEY = os.getenv("COHERE_API_KEY") # Use Cohere API key now
+GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 app = Flask(__name__)
-CORS(app)
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+
+# Configuration
+DATA_FOLDER = "data"
+PDF_DIRECTORY = r"database\upload"  # Default PDF directory
+CHUNK_SIZE = 700
+CHROMA_DB_PATH = "database\indexing\chroma_langchain_db"
+#EMBEDDINGS_MODEL_NAME = "sentence-transformers/all-mpnet-base-v2" #No Longer Needed - Using cohere.
 
 
-# Database Setup
-def get_database_connection():
-    client = pymongo.MongoClient(MONGODB_URI)
-    return client[DATABASE_NAME]
-
-db = get_database_connection()
-collection = db[COLLECTION_NAME]
+# Ensure data folder exists
+if not os.path.exists(DATA_FOLDER):
+    os.makedirs(DATA_FOLDER)
 
 
-# Model Initialization
-def initialize_models():
-    embedding_model = HuggingFaceEmbeddings(model_name=EMBEDDING_MODEL_NAME)
-    topic_model = BERTopic()
-    groq_llm = ChatGroq(model=GROQ_MODEL_NAME, api_key=GROQ_API_KEY)
-    return embedding_model, topic_model, groq_llm
+# Instead of globals, use Flask's app context or a database/cache
+def get_chat_session_history(session_id: str) -> BaseChatMessageHistory:
+    """Gets or creates a chat history for a given session."""
+    # Access the chat history store from the Flask app's config
+    chat_history_store = app.config.setdefault('chat_history_store', {})
 
-embedding_model, topic_model, groq_llm = initialize_models()
+    if session_id not in chat_history_store:
+        chat_history_store[session_id] = ChatMessageHistory()
+    return chat_history_store[session_id]
 
 
-# PDF Processing Functions
-def extract_text_from_pdf(pdf_path):
-    """Extracts text and page count from a PDF."""
+
+def load_documents_from_directory(directory_path):
+    """Loads PDF documents from a directory using PyPDFDirectoryLoader."""
+    if not os.path.exists(directory_path):
+        print(f"Error: Directory '{directory_path}' not found.")
+        return None
+
+    loader = PyPDFDirectoryLoader(directory_path)
     try:
-        doc = fitz.open(pdf_path)
-        text = " ".join([page.get_text("text") for page in doc])
-        return text, len(doc)
+        documents = loader.load()
+        return documents
     except Exception as e:
-        print(f"Error extracting text from {pdf_path}: {e}")
-        return "", 0
-
-
-def generate_embedding(text):
-    """Generates embeddings for the given text using the pre-loaded embedding model."""
-    try:
-        return embedding_model.embed_documents([text])[0]
-    except Exception as e:
-        print(f"Error generating embedding: {e}")
+        print(f"Error loading documents from directory: {e}")
         return None
 
 
-def generate_topics(text):
-    """Generates topics for the given text using the pre-loaded topic model."""
+def initialize_vector_store(documents):
+    """Initializes and populates a Chroma vector store from a list of documents."""
+    if not documents:
+        print("Warning: No documents to process.  Ensure the directory contains PDF files.")
+        return None
+
+    splitter = RecursiveCharacterTextSplitter(chunk_size=CHUNK_SIZE, chunk_overlap=50)
+    docs = splitter.split_documents(documents)
+
+    # Use CohereEmbeddings with API key from env variable
+    embeddings = CohereEmbeddings(
+        model="embed-english-v3.0",
+        cohere_api_key=COHERE_API_KEY # Load cohere API Key
+    )
+
+
+    vector_store = Chroma(
+        collection_name="Patient_data",
+        embedding_function=embeddings,
+        persist_directory=CHROMA_DB_PATH,
+    )
+
     try:
-        topics, _ = topic_model.fit_transform([text])
-        return topics
+        vector_store.add_documents(documents=docs)
+        return vector_store
     except Exception as e:
-        print(f"Error generating topics: {e}")
-        return []
-
-
-def store_pdf_metadata(filename, topics, summary, page_count, embedding):
-    """Stores PDF metadata in MongoDB."""
-    try:
-        doc = {
-            "filename": filename,
-            "topics": topics,
-            "summary": summary,
-            "page_count": page_count,
-            # "embedding": embedding.tolist() if embedding is not None else None  # Convert to list for JSON storage
-        }
-        collection.insert_one(doc)
-    except Exception as e:
-        print(f"Error storing PDF metadata in MongoDB: {e}")
-
-
-# FAISS Indexing Functions
-def build_faiss_index(embeddings):
-    """Builds a FAISS index from the given embeddings."""
-    try:
-        d = len(embeddings[0])
-        index = faiss.IndexFlatL2(d)
-        index.add(np.array(embeddings))
-        faiss.write_index(index, FAISS_INDEX_PATH)
-        return index
-    except Exception as e:
-        print(f"Error building FAISS index: {e}")
+        print(f"Error adding documents to vector store: {e}")
         return None
 
 
-def load_faiss_index():
-    """Loads the FAISS index from the saved file."""
-    try:
-        return faiss.read_index(FAISS_INDEX_PATH)
-    except Exception as e:
-        print(f"Error loading FAISS index: {e}")
-        return None
+def create_conversational_rag_chain(llm, vector_store):
+    """Creates a conversational RAG chain for question answering."""
+
+    contextualize_q_prompt = ChatPromptTemplate.from_messages(
+        [
+            ("system", """Given a chat history and the latest user question
+which might reference context in the chat history, formulate a standalone question
+which can be understood without the chat history. Do NOT answer the question,
+just reformulate it if needed and otherwise return it as is."""),
+            MessagesPlaceholder("chat_history"),
+            ("human", "{input}"),
+        ]
+    )
 
 
-# Helper function to process a single PDF
-def process_pdf(pdf_path, all_topics):
-    """Processes a single PDF file and stores its metadata."""
-    filename = os.path.basename(pdf_path)
-    text, page_count = extract_text_from_pdf(pdf_path)
-    if not text:
-        return None  # Skip if text extraction failed
 
-    embedding = generate_embedding(text)
-    summary = text[:SUMMARY_LENGTH]
+    qa_prompt_template = ChatPromptTemplate.from_template("""
+**Prompt:**
+**Context:**
+{context}
+**Question:**
+{input}
+**Instructions:**
+1. **Carefully read and understand the provided context.**
+2. **Think step-by-step to formulate a comprehensive and accurate answer.**
+3. **Base your response solely on the given context.**
+4. **Ensure the answer is clear, concise, and easy to understand.**
+5. **Ensure the answer is in small understandable points with all content.**
+**Response:**
+[Your detailed and well-reasoned answer]
+**Note:** This prompt emphasizes careful consideration and accurate response based on the provided context.
+""")
 
-    store_pdf_metadata(filename, all_topics, summary, page_count, embedding)
+    question_answer_chain = create_stuff_documents_chain(llm, qa_prompt_template)
 
-    return embedding  # Return embedding for index building
+    history_aware_retriever = create_history_aware_retriever(
+        llm,
+        vector_store.as_retriever(
+            search_type="mmr",
+            search_kwargs={'k': 10, 'fetch_k': 50}
+        ),
+        contextualize_q_prompt
+    )
 
+    retrieval_chain = create_retrieval_chain(history_aware_retriever, question_answer_chain)
 
-# Route Handlers
-@app.route('/')
-def serve_frontend():
-    """Serves the frontend application."""
-    return send_from_directory("templates", "index.html")
+    conversational_rag_chain = RunnableWithMessageHistory(
+        retrieval_chain,
+        get_chat_session_history,
+        input_messages_key="input",
+        history_messages_key="chat_history",
+        output_messages_key="answer",
+    )
 
-
-@app.route('/upload', methods=['POST'])
-def upload_pdfs():
-    """Handles PDF file uploads."""
-    if 'pdfs' not in request.files:
-        return jsonify({"message": "No file part"}), 400
-
-    files = request.files.getlist('pdfs')
-    uploaded_files = []
-    for file in files:
-        if file.filename != '':  # Check if a file was selected
-            file_path = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
-            try:
-                file.save(file_path)
-                uploaded_files.append(file_path)
-            except Exception as e:
-                return jsonify({"message": f"Error saving file {file.filename}: {e}"}), 500
-    
-    if not uploaded_files:
-        return jsonify({"message": "No valid files uploaded."}), 400
-
-    return jsonify({"message": "Files uploaded successfully!"}), 200
+    return conversational_rag_chain
 
 
-@app.route('/process', methods=['POST'])
-def process():
-    """Processes uploaded PDFs, generates embeddings, and builds the FAISS index."""
-    pdf_files = [os.path.join(app.config['UPLOAD_FOLDER'], f) for f in os.listdir(app.config['UPLOAD_FOLDER']) if f.endswith(".pdf")]
-    all_embeddings = []
-    all_text = []  # Store text from all PDFs
-
-    for pdf_path in pdf_files:
-        text, page_count = extract_text_from_pdf(pdf_path)
-        if not text:
-            continue  # Skip if text extraction failed
-        all_text.append(text)
-
-    if all_text:
-        combined_text = " ".join(all_text) # Concatenate the texts
-        topics = generate_topics(combined_text) # Now generate topics from all texts
-
-        # Generate embeddings and store metadata for each PDF based on combined topics:
-        for pdf_path in pdf_files:
-          embedding = process_pdf(pdf_path, topics)
-          if embedding is not None:
-              all_embeddings.append(embedding)
-
-        build_faiss_index(all_embeddings)
-        return jsonify({"message": "Processing completed!"}), 200
-    else:
-        return jsonify({"message": "No PDFs processed. Ensure PDFs are valid."}), 500
+@app.route('/process_pdf', methods=['POST'])
+def process_pdf():
+    """Endpoint to process PDF data and create the RAG chain."""
+    # Store in the app context, not globals
+    app.config['conversational_rag_chain'] = None
+    app.config['vector_store'] = None
 
 
-@app.route('/search', methods=['POST'])
-def search():
-    """Searches for PDFs based on a query using FAISS index."""
     data = request.get_json()
-    query = data.get("query", "")
+    pdf_directory = data.get('pdf_directory', PDF_DIRECTORY)  # Use the default if not provided
 
-    index = load_faiss_index()
-    if index is None:
-        return jsonify({"message": "FAISS index not found. Please process PDFs first."}), 500
+    documents = load_documents_from_directory(pdf_directory)
+    if not documents:
+        return jsonify({"error": "Failed to load documents."}), 400
 
-    query_embedding = generate_embedding(query)
-    if query_embedding is None:
-        return jsonify({"message": "Error generating embedding for the query."}), 500
+    vector_store = initialize_vector_store(documents)
+    if not vector_store:
+        return jsonify({"error": "Failed to initialize vector store."}), 500
 
-    query_embedding = np.array(query_embedding).reshape(1, -1)  # Reshape for FAISS
-    _, idxs = index.search(query_embedding, 3)  # Search top 3
+    # if not GROQ_API_KEY:
+    #     return jsonify({"error": "GROQ_API_KEY not found in environment variables."}), 500
 
-    results = []
-    for i, doc in enumerate(collection.find()):
-        if i in idxs[0]:
-            results.append(doc)
+    llm = ChatGroq(api_key=GROQ_API_KEY, model_name="llama-3.1-8b-instant")
 
-    return jsonify(results), 200
+    conversational_rag_chain = create_conversational_rag_chain(llm, vector_store)
+
+    # Store in the app config
+    app.config['conversational_rag_chain'] = conversational_rag_chain
+    app.config['vector_store'] = vector_store
+
+    return jsonify({"message": "PDF data processed successfully."}), 200
 
 
-# Main execution
+@app.route('/query', methods=['POST'])
+def query():
+    """Endpoint to query the RAG chain."""
+
+    data = request.get_json()
+    user_question = data.get('question')
+    session_id = data.get('session_id', 'default_session')  # Provide a default session ID if none given
+
+
+    if not user_question:
+        return jsonify({"error": "Missing question."}), 400
+
+    # Access from app context
+    conversational_rag_chain = app.config.get('conversational_rag_chain')
+    vector_store = app.config.get('vector_store')
+
+
+    if conversational_rag_chain is None or vector_store is None:
+        # Reinitialize if needed, especially if the server restarts
+        print("Reinitializing RAG chain...")
+
+        # groq_api = os.environ.get("groq_api")
+        # if not groq_api:
+        #     return jsonify({"error": "GROQ_API_KEY not found in environment variables."}), 500
+
+        llm = ChatGroq(api_key=GROQ_API_KEY, model_name="llama-3.1-8b-instant")
+
+        if not os.path.exists(CHROMA_DB_PATH): # Check if DB exists.  If not re-initialize.
+            print("Chroma DB not found.  Processing PDF and re-creating.")
+            documents = load_documents_from_directory(PDF_DIRECTORY) #  Load from default location.  Need a better way to persist this.
+            if not documents:
+                return jsonify({"error": "Failed to load documents for re-initialization."}), 500
+
+            vector_store = initialize_vector_store(documents)
+            if not vector_store:
+                return jsonify({"error": "Failed to initialize vector store."}), 500
+
+        else:
+            #Re-Initialize Vector store and load from persistence.
+            embeddings = CohereEmbeddings(
+                model="embed-english-v3.0",
+                cohere_api_key=COHERE_API_KEY # Load cohere API Key
+                )
+
+            vector_store = Chroma(
+                collection_name="Patient_data",
+                embedding_function=embeddings,
+                persist_directory=CHROMA_DB_PATH,
+            )
+
+        conversational_rag_chain = create_conversational_rag_chain(llm, vector_store)
+        app.config['conversational_rag_chain'] = conversational_rag_chain
+        app.config['vector_store'] = vector_store
+
+
+
+
+    try:
+        response = conversational_rag_chain.invoke(
+            {"input": user_question},
+            config={"configurable": {"session_id": session_id}},
+        )
+        answer = response['answer']
+        return jsonify({"answer": answer}), 200
+    except Exception as e:
+        print(f"Error generating answer: {e}")
+        return jsonify({"error": f"Error generating answer: {e}"}), 500
+
+@app.route('/')
+def index():
+    return render_template('index-2.html')
+
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    # Use app context for initialization
+    with app.app_context():
+        app.config['conversational_rag_chain'] = None
+        app.config['vector_store'] = None
+
+    app.run(debug=True, port=5000)  # Or any other port you prefer

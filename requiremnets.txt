@@ -6,4 +6,7 @@ flask-cors
 pymongo
 langchain
 langchain_community
+langchain_huggingFace
 bertopic
+langchain_google_vertexai
+vertexai

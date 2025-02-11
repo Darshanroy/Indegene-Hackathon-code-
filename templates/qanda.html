@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Q&A with PDFs</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        #chat-container {
+            margin-bottom: 20px;
+        }
+
+        #chat-input {
+            width: 70%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        #chat-button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        #chat-button:hover {
+            background-color: #0056b3;
+        }
+
+        #chat-history {
+            margin-top: 20px;
+            border-top: 1px solid #ccc;
+            padding-top: 10px;
+        }
+
+        .error-message {
+            color: red;
+            margin-top: 10px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Q&A with PDFs</h1>
+
+        <div id="chat-container">
+            <input type="text" id="chat-input" placeholder="Ask a question...">
+            <button id="chat-button">Send</button>
+        </div>
+
+        <div id="chat-history">
+            <h3>Chat History:</h3>
+            <ul id="history-list"></ul>
+        </div>
+
+        <div class="error-message" id="error-message"></div>
+
+    </div>
+
+    <script>
+        document.getElementById('chat-button').addEventListener('click', function() {
+            var query = document.getElementById('chat-input').value;
+            if (query) {
+                fetch('/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ query: query })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        document.getElementById('error-message').innerText = data.error;
+                    } else {
+                        document.getElementById('error-message').innerText = '';
+                        var historyList = document.getElementById('history-list');
+                        var listItem = document.createElement('li');
+                        listItem.innerText = 'Q: ' + query + '\nA: ' + data.answer;
+                        historyList.appendChild(listItem);
+                        document.getElementById('chat-input').value = ''; // Clear input
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    document.getElementById('error-message').innerText = 'An error occurred.';
+                });
+            }
+        });
+    </script>
+</body>
+</html>

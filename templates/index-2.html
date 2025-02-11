@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PDF Chat</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #chat-area {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+            height: 300px;
+            overflow-y: scroll;
+        }
+
+        .message {
+            padding: 8px;
+            margin-bottom: 5px;
+            border-radius: 5px;
+            word-break: break-word; /* Prevent long words from breaking layout */
+        }
+
+        .user-message {
+            background-color: #e2f0cb;
+            text-align: right;
+        }
+
+        .bot-message {
+            background-color: #f9f9f9;
+            text-align: left;
+        }
+
+        #input-area {
+            display: flex;
+        }
+
+        #question-input {
+            flex-grow: 1;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-right: 5px;
+        }
+
+        #submit-button {
+            padding: 8px 15px;
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #submit-button:hover {
+            background-color: #4cae4c;
+        }
+
+        #status {
+            margin-top: 10px;
+            font-style: italic;
+            color: #888;
+        }
+
+        #initialize-button {
+            padding: 8px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 10px; /* Add spacing between buttons */
+        }
+
+        #initialize-button:hover {
+            background-color: #0056b3;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>PDF Chat</h1>
+
+        <button id="initialize-button">Initialize PDF Chat</button> <!-- Explicit button for initialization -->
+
+        <div id="chat-area">
+            <!-- Chat messages will be displayed here -->
+        </div>
+
+        <div id="input-area">
+            <input type="text" id="question-input" placeholder="Ask me anything about the PDFs!" />
+            <button id="submit-button">Send</button>
+        </div>
+
+        <div id="status">
+            <!-- Status messages will be displayed here -->
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/markdown-it@12.0.0/dist/markdown-it.min.js"></script>
+    <script>
+        const chatArea = document.getElementById('chat-area');
+        const questionInput = document.getElementById('question-input');
+        const submitButton = document.getElementById('submit-button');
+        const statusArea = document.getElementById('status');
+        const initializeButton = document.getElementById('initialize-button');
+
+        let sessionId = 'user_' + Date.now(); // Generate a unique session ID
+
+        // Initialize Markdown-it
+        const markdown = new markdownit();
+
+        // Function to display a message in the chat area
+        function displayMessage(text, sender) {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('message');
+            messageDiv.classList.add(sender + '-message');
+            messageDiv.innerHTML = markdown.render(text); // Render Markdown
+            chatArea.appendChild(messageDiv);
+            chatArea.scrollTop = chatArea.scrollHeight;
+        }
+
+        // Function to handle sending a query to the backend
+        function sendQuery(question) {
+            statusArea.textContent = "Loading...";
+            displayMessage(question, 'user');
+
+            fetch('/query', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    question: question,
+                    session_id: sessionId
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                statusArea.textContent = "";
+                if (data.answer) {
+                    displayMessage(data.answer, 'bot');
+                } else if (data.error) {
+                    statusArea.textContent = "Error: " + data.error;
+                } else {
+                    statusArea.textContent = "Unexpected error.";
+                }
+            })
+            .catch(error => {
+                statusArea.textContent = "Network error: " + error;
+            });
+        }
+
+        // Function to handle the submit button click
+        submitButton.addEventListener('click', function() {
+            const question = questionInput.value.trim();
+            if (question !== "") {
+                sendQuery(question);
+                questionInput.value = "";
+            }
+        });
+
+        // Allow submitting with Enter key
+        questionInput.addEventListener('keyup', function(event) {
+            if (event.key === 'Enter') {
+                submitButton.click();
+            }
+        });
+
+        // Initialize the PDF processing
+        function initializePDFProcessing() {
+            statusArea.textContent = "Initializing PDF processing...";
+            initializeButton.disabled = true;  // Disable the button during processing
+
+            fetch('/process_pdf_rag', { // Changed to /process_pdf_rag endpoint
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({}) // No need to send pdf_directory
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message === "PDF data processed successfully.") {
+                    statusArea.textContent = "PDFs processed. You can now ask questions.";
+                } else if (data.error) {
+                    statusArea.textContent = "PDF processing error: " + data.error;
+                } else {
+                    statusArea.textContent = "Unexpected error during PDF processing.";
+                }
+                initializeButton.disabled = false; // Re-enable the button
+            })
+            .catch(error => {
+                statusArea.textContent = "Network error during PDF processing: " + error;
+                initializeButton.disabled = false; // Re-enable the button
+            });
+        }
+
+        // Add event listener to the initialize button
+        initializeButton.addEventListener('click', initializePDFProcessing);
+
+    </script>
+</body>
+</html>

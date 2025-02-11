@@ -4,7 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e7ec3e59-96dd-4fa0-aac2-577037332b52" name="Changes" comment="" />
+    <list default="true" id="e7ec3e59-96dd-4fa0-aac2-577037332b52" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/indexing/faiss_index.bin" beforeDir="false" afterPath="$PROJECT_DIR$/database/indexing/faiss_index.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/indexing/pdf_files.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/database/indexing/pdf_files.pkl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/upload/leph101.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/upload/leph102.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/upload/leph103.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/upload/leph104.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/upload/leph105.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/upload/leph106.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/upload/leph107.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/upload/leph108.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/upload/leph1an.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/upload/leph1ps.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main-v2.py" beforeDir="false" afterPath="$PROJECT_DIR$/main-v2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requiremnets.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requiremnets.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -17,9 +35,12 @@
       </list>
     </option>
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 2
-}]]></component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
   <component name="ProjectId" id="2snEJukl4qUIMlrQp46yzB1SfYN" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -29,7 +50,8 @@
   "keyToString": {
     "DefaultHtmlFileTemplate": "HTML File",
     "Python.main.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true"
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main"
   }
 }]]></component>
   <component name="RecentsManager">

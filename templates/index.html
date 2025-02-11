@@ -123,7 +123,7 @@
 
         <div class="buttons-container">
             <button class="option-button" id="btn1">Search PDFs</button>
-            <button class="option-button" id="btn2">Button 2</button>
+            <button class="option-button" id="btn2">Chat with PDFs</button>
             <button class="option-button" id="btn3">Button 3</button>
             <button class="clear-button">Clear</button>
         </div>
@@ -150,6 +150,10 @@
     <script>
         document.getElementById('btn1').addEventListener('click', function() {
             window.location.href = '/search_pdf_page'; // Redirect to search page
+        });
+
+        document.getElementById('btn2').addEventListener('click', function() {
+            window.location.href = '/pdf_chat_page'; // Redirect to the pdf chat page
         });
     </script>
 </body>
