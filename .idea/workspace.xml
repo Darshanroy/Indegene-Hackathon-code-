@@ -7,21 +7,22 @@
     <list default="true" id="e7ec3e59-96dd-4fa0-aac2-577037332b52" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/indexing/chroma_db/chroma.sqlite3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/indexing/chroma_langchain_db/90c2b6f5-31d1-4e2e-9c61-07c9b70ea019/data_level0.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/indexing/chroma_langchain_db/90c2b6f5-31d1-4e2e-9c61-07c9b70ea019/header.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/indexing/chroma_langchain_db/90c2b6f5-31d1-4e2e-9c61-07c9b70ea019/length.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/indexing/chroma_langchain_db/90c2b6f5-31d1-4e2e-9c61-07c9b70ea019/link_lists.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/indexing/chroma_langchain_db/chroma.sqlite3" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/database/indexing/faiss_index.bin" beforeDir="false" afterPath="$PROJECT_DIR$/database/indexing/faiss_index.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/indexing/pdf_files.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/database/indexing/pdf_files.pkl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/upload/leph101.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/upload/leph102.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/upload/leph103.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/upload/leph104.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/upload/leph105.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/upload/leph106.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/upload/leph107.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/upload/leph108.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/upload/leph1an.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/upload/leph1ps.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main-v2.py" beforeDir="false" afterPath="$PROJECT_DIR$/main-v2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/faiss_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/faiss_utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main-v2.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/rag_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/rag_utils.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/requiremnets.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requiremnets.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/index-2.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pdf_chat_page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/qanda.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/upload.html" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,12 +32,16 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Python Script" />
         <option value="HTML File" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/app.py" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 2

@@ -11,10 +11,16 @@ from flask import url_for
 
 def sanitize_filename(filename):
     """Sanitizes a filename."""
-    name, ext = os.path.splitext(filename)
-    name = re.sub(r'[^a-zA-Z0-9_\-]', '_', name)
-    ext = re.sub(r'[^a-zA-Z0-9\.]', '', ext)
-    return name + ext
+    try:
+        name, ext = os.path.splitext(filename)
+        name = re.sub(r'[^a-zA-Z0-9_\-]', '_', name)
+        ext = re.sub(r'[^a-zA-Z0-9\.]', '', ext)
+        sanitized_filename = name + ext
+        logging.info(f"Sanitized filename from {filename} to {sanitized_filename}")
+        return sanitized_filename
+    except Exception as e:
+        logging.exception(f"Error sanitizing filename {filename}: {e}")
+        return None
 
 def extract_text_from_pdf(pdf_path):
     """Extracts text content from a PDF file."""
@@ -23,6 +29,8 @@ def extract_text_from_pdf(pdf_path):
         text = ""
         for page in doc:
             text += page.get_text("text") + "\n"
+        doc.close()  # Close the document to release resources
+        logging.info(f"Successfully extracted text from {pdf_path}")
         return text
     except Exception as e:
         logging.exception(f"Error extracting text from {pdf_path}: {e}")
@@ -30,14 +38,30 @@ def extract_text_from_pdf(pdf_path):
 
 def generate_embedding(text, model_instance):
     """Generates an embedding vector."""
-    return model_instance.encode(text, convert_to_tensor=True)
+    try:
+        embedding = model_instance.encode(text, convert_to_tensor=True)
+        logging.debug(f"Generated embedding for text: {text[:50]}...")  # Log first 50 characters
+        return embedding
+    except Exception as e:
+        logging.exception(f"Error generating embedding for text: {e}")
+        return None
 
 def store_embeddings(pdf_texts, filenames, index_instance, pdf_files_list, model_instance):
     """Stores embeddings in the FAISS index."""
-    embeddings = np.array([generate_embedding(text, model_instance).cpu().numpy() for text in pdf_texts])
-    index_instance.add(embeddings)
-    pdf_files_list.extend(filenames)
-    return index_instance, pdf_files_list
+    try:
+        embeddings = np.array([generate_embedding(text, model_instance).cpu().numpy() for text in pdf_texts if generate_embedding(text, model_instance) is not None])  # Filter out None embeddings
+        valid_filenames = [filename for text, filename in zip(pdf_texts, filenames) if generate_embedding(text, model_instance) is not None]  # Filter filenames corresponding to valid embeddings
+
+        if embeddings.size > 0:
+            index_instance.add(embeddings)
+            pdf_files_list.extend(valid_filenames)
+            logging.info(f"Stored {embeddings.shape[0]} embeddings in FAISS index.")
+        else:
+            logging.warning("No valid embeddings to store.")
+        return index_instance, pdf_files_list
+    except Exception as e:
+        logging.exception(f"Error storing embeddings: {e}")
+        return index_instance, pdf_files_list
 
 def save_index_and_files(index_instance, pdf_files_list, index_path, pdf_files_path):
     """Saves the FAISS index and PDF file list to disk."""
@@ -101,9 +125,19 @@ def initialize_index(pdf_folder, index_path, pdf_files_path, dimension_value, mo
 
 def retrieve_similar_pdfs(query, index_instance, pdf_files_list, model_instance, top_k=2):
     """Retrieves similar PDFs based on the query."""
-    query_embedding = generate_embedding(query, model_instance).cpu().numpy().reshape(1, -1)
-    distances, indices = index_instance.search(query_embedding, top_k)
-    return [pdf_files_list[i] for i in indices[0]]
+    try:
+        query_embedding = generate_embedding(query, model_instance)
+        if query_embedding is None:
+            logging.warning("Could not generate embedding for query, returning empty list.")
+            return []
+        query_embedding = query_embedding.cpu().numpy().reshape(1, -1)
+        distances, indices = index_instance.search(query_embedding, top_k)
+        similar_pdfs = [pdf_files_list[i] for i in indices[0]]
+        logging.info(f"Retrieved similar PDFs for query '{query[:50]}...': {similar_pdfs}")  # Log first 50 characters of query
+        return similar_pdfs
+    except Exception as e:
+        logging.exception(f"Error retrieving similar PDFs: {e}")
+        return []
 
 def process_search_request(query, index_instance, pdf_files_list, model_instance, upload_folder):
     """Processes a search request, retrieves similar PDFs."""
@@ -120,13 +154,20 @@ def process_search_request(query, index_instance, pdf_files_list, model_instance
     # Create response with filename, download link, and embed link for each PDF
     results = []
     for filename in similar_pdfs:
-        download_link = url_for('download_pdf', filename=filename, _external=True)  # Generates the fully qualified URL
-        embed_link = url_for('view_pdf', filename=filename, _external=True)  # Create an URL endpoint to render the PDF
-        results.append({
-            "filename": filename,
-            "download_link": download_link,
-            "embed_link": embed_link
-        })
+        try:
+            download_link = url_for('download_pdf', filename=filename, _external=True)  # Generates the fully qualified URL
+            embed_link = url_for('view_pdf', filename=filename, _external=True)  # Create an URL endpoint to render the PDF
+            results.append({
+                "filename": filename,
+                "download_link": download_link,
+                "embed_link": embed_link
+            })
+        except Exception as e:
+            logging.exception(f"Error generating URL for {filename}: {e}")
+            results.append({
+                "filename": filename,
+                "error": "Could not generate download/embed link"
+            })
 
     logging.info(f"Found similar PDFs: {results}")
     return {"results": results}

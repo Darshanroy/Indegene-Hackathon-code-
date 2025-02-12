@@ -1,0 +1,69 @@
+2025-02-12 19:52:00,977 - WARNING - Hugging Face API token not found in environment.  Functionality might be limited.
+2025-02-12 19:52:00,980 - INFO - Use pytorch device_name: cpu
+2025-02-12 19:52:00,980 - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-02-12 19:52:06,790 - INFO - Loaded embedding model: all-MiniLM-L6-v2
+2025-02-12 19:52:06,791 - INFO - Loaded FAISS index and PDF files from disk.
+2025-02-12 19:52:06,806 - WARNING -  * Debugger is active!
+2025-02-12 19:52:06,813 - INFO -  * Debugger PIN: 118-960-469
+2025-02-12 19:52:37,366 - INFO - 127.0.0.1 - - [12/Feb/2025 19:52:37] "GET / HTTP/1.1" 200 -
+2025-02-12 19:52:42,800 - INFO - 127.0.0.1 - - [12/Feb/2025 19:52:42] "GET /search_pdf_page HTTP/1.1" 200 -
+2025-02-12 19:53:15,048 - INFO - 127.0.0.1 - - [12/Feb/2025 19:53:15] "GET / HTTP/1.1" 200 -
+2025-02-12 19:53:15,141 - INFO - 127.0.0.1 - - [12/Feb/2025 19:53:15] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-02-12 19:58:20,433 - INFO - Sanitized filename from pyspark.pdf to pyspark.pdf
+2025-02-12 19:58:20,580 - INFO - Saved file 'pyspark.pdf' to database/upload/pyspark.pdf
+2025-02-12 19:58:20,583 - INFO - Loading PDFs from: database/upload/
+2025-02-12 19:58:20,585 - INFO - Processing database/upload/APPLICATION OF LLMS.pdf...
+2025-02-12 19:58:22,210 - INFO - Successfully extracted text from database/upload/APPLICATION OF LLMS.pdf
+2025-02-12 19:58:22,210 - INFO - Processing database/upload/Data Collection.pdf...
+2025-02-12 19:58:23,005 - INFO - Successfully extracted text from database/upload/Data Collection.pdf
+2025-02-12 19:58:23,006 - INFO - Processing database/upload/DS_Interview_GUIDE.pdf...
+2025-02-12 19:58:25,749 - INFO - Successfully extracted text from database/upload/DS_Interview_GUIDE.pdf
+2025-02-12 19:58:25,751 - INFO - Processing database/upload/ImP_PLots.pdf...
+2025-02-12 19:58:25,825 - INFO - Successfully extracted text from database/upload/ImP_PLots.pdf
+2025-02-12 19:58:25,826 - INFO - Processing database/upload/kUBERNETES.pdf...
+2025-02-12 19:58:28,028 - INFO - Successfully extracted text from database/upload/kUBERNETES.pdf
+2025-02-12 19:58:28,030 - INFO - Processing database/upload/Natural Language Processing with Transformers Building Language Applications with Hugging Face by Lewis Tunstall  Leandro von Werra  Thomas Wolf.pdf...
+2025-02-12 19:58:31,798 - INFO - Successfully extracted text from database/upload/Natural Language Processing with Transformers Building Language Applications with Hugging Face by Lewis Tunstall  Leandro von Werra  Thomas Wolf.pdf
+2025-02-12 19:58:31,798 - INFO - Processing database/upload/pyspark.pdf...
+2025-02-12 19:58:35,775 - INFO - Successfully extracted text from database/upload/pyspark.pdf
+2025-02-12 19:58:35,776 - INFO - Processing database/upload/SQL_cheatsheet.pdf...
+2025-02-12 19:58:36,033 - INFO - Successfully extracted text from database/upload/SQL_cheatsheet.pdf
+2025-02-12 19:58:36,033 - INFO - Processing database/upload/Timetable - Google Sheets.pdf...
+2025-02-12 19:58:36,044 - INFO - Successfully extracted text from database/upload/Timetable - Google Sheets.pdf
+2025-02-12 19:59:02,080 - INFO - Stored 9 embeddings in FAISS index.
+2025-02-12 19:59:02,081 - INFO - Indexed 9 PDFs.
+2025-02-12 19:59:02,090 - INFO - FAISS index and PDF files saved to disk.
+2025-02-12 19:59:02,094 - INFO - FAISS index rebuilt after file upload.
+2025-02-12 19:59:04,135 - INFO - Processing PDF data for RAG chain...
+2025-02-12 19:59:28,443 - INFO - 127.0.0.1 - - [12/Feb/2025 19:59:28] "GET /search_pdf_page HTTP/1.1" 200 -
+2025-02-12 19:59:58,473 - INFO - Query received: pyspark related stuff
+2025-02-12 20:00:00,184 - INFO - Query received: pyspark related stuff
+2025-02-12 20:00:01,160 - INFO - Retrieved similar PDFs for query 'pyspark related stuff...': ['pyspark.pdf', 'ImP_PLots.pdf']
+2025-02-12 20:00:01,176 - INFO - Found similar PDFs: [{'filename': 'pyspark.pdf', 'download_link': 'http://localhost:5000/download/pyspark.pdf', 'embed_link': 'http://localhost:5000/view/pyspark.pdf'}, {'filename': 'ImP_PLots.pdf', 'download_link': 'http://localhost:5000/download/ImP_PLots.pdf', 'embed_link': 'http://localhost:5000/view/ImP_PLots.pdf'}]
+2025-02-12 20:00:01,192 - INFO - 127.0.0.1 - - [12/Feb/2025 20:00:01] "POST /search_pdf HTTP/1.1" 200 -
+2025-02-12 20:00:01,564 - INFO - Viewing PDF: pyspark.pdf
+2025-02-12 20:00:01,569 - INFO - 127.0.0.1 - - [12/Feb/2025 20:00:01] "GET /view/pyspark.pdf HTTP/1.1" 200 -
+2025-02-12 20:00:01,578 - INFO - Viewing PDF: ImP_PLots.pdf
+2025-02-12 20:00:01,624 - INFO - 127.0.0.1 - - [12/Feb/2025 20:00:01] "GET /view/ImP_PLots.pdf HTTP/1.1" 200 -
+2025-02-12 20:00:03,888 - INFO - Retrieved similar PDFs for query 'pyspark related stuff...': ['pyspark.pdf', 'ImP_PLots.pdf']
+2025-02-12 20:00:03,934 - INFO - Found similar PDFs: [{'filename': 'pyspark.pdf', 'download_link': 'http://localhost:5000/download/pyspark.pdf', 'embed_link': 'http://localhost:5000/view/pyspark.pdf'}, {'filename': 'ImP_PLots.pdf', 'download_link': 'http://localhost:5000/download/ImP_PLots.pdf', 'embed_link': 'http://localhost:5000/view/ImP_PLots.pdf'}]
+2025-02-12 20:00:03,951 - INFO - 127.0.0.1 - - [12/Feb/2025 20:00:03] "POST /search_pdf HTTP/1.1" 200 -
+2025-02-12 20:00:04,375 - INFO - Viewing PDF: pyspark.pdf
+2025-02-12 20:00:04,420 - INFO - Viewing PDF: ImP_PLots.pdf
+2025-02-12 20:00:04,465 - INFO - 127.0.0.1 - - [12/Feb/2025 20:00:04] "[35m[1mGET /view/pyspark.pdf HTTP/1.1[0m" 206 -
+2025-02-12 20:00:04,505 - INFO - 127.0.0.1 - - [12/Feb/2025 20:00:04] "[36mGET /view/ImP_PLots.pdf HTTP/1.1[0m" 304 -
+2025-02-12 20:00:04,686 - INFO - Viewing PDF: pyspark.pdf
+2025-02-12 20:00:04,730 - INFO - 127.0.0.1 - - [12/Feb/2025 20:00:04] "[35m[1mGET /view/pyspark.pdf HTTP/1.1[0m" 206 -
+2025-02-12 20:00:29,031 - INFO - 127.0.0.1 - - [12/Feb/2025 20:00:29] "GET /pdf_chat_page HTTP/1.1" 200 -
+2025-02-12 20:00:41,017 - INFO - Received a query request.
+2025-02-12 20:00:41,017 - WARNING - RAG chain or vector store is not initialized. Re-initializing...
+2025-02-12 20:01:06,221 - INFO - Use pytorch device_name: cpu
+2025-02-12 20:01:06,236 - INFO - Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2025-02-12 20:01:24,665 - INFO - Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+2025-02-12 20:01:29,339 - INFO - Successfully loaded 1310 documents from database\upload
+2025-02-12 20:01:29,633 - INFO - Use pytorch device_name: cpu
+2025-02-12 20:01:29,634 - INFO - Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2025-02-12 20:01:30,060 - INFO - Successfully created conversational RAG chain.
+2025-02-12 20:01:32,112 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-12 20:01:32,139 - INFO - Successfully generated answer for the query.
+2025-02-12 20:01:32,141 - INFO - 127.0.0.1 - - [12/Feb/2025 20:01:32] "POST /query HTTP/1.1" 200 -

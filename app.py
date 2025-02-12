@@ -25,12 +25,19 @@ from langchain.chains import create_history_aware_retriever, create_retrieval_ch
 from langchain.chains.combine_documents import create_stuff_documents_chain
 from dotenv import load_dotenv
 import logging  # Import logging
+from datetime import datetime  # Import datetime
 from faiss_utils import process_search_request, initialize_index, load_index_and_files, sanitize_filename
 from rag_utils import process_pdf_rag, query_rag_chain
+import requests
 
+# --- Logging Configuration ---
+LOG_FOLDER = 'logs'
+os.makedirs(LOG_FOLDER, exist_ok=True)  # Ensure 'logs' folder exists
 
-# Configure logging
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+now = datetime.now()
+log_filename = os.path.join(LOG_FOLDER, f'{now.strftime("%Y-%m-%d_%H-%M-%S")}.log')
+
+logging.basicConfig(filename=log_filename, level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
@@ -193,7 +200,7 @@ def view_pdf(filename):
 
 @app.route('/pdf_chat_page')
 def pdf_chat_page():
-    return render_template('index-2.html')
+    return render_template('pdf_chat_page.html')
 
 @app.route('/process_pdf_rag_route', methods=['POST'])
 def process_pdf_rag_route():
@@ -221,6 +228,7 @@ if __name__ == '__main__':
     MODEL_NAME = os.environ.get("MODEL_NAME", "all-MiniLM-L6-v2")
     model = load_embedding_model(MODEL_NAME)
     if not model:
+        logging.error("Failed to load embedding model. Exiting.")
         raise RuntimeError("Failed to load embedding model. Exiting.")
     dimension = model.get_sentence_embedding_dimension()
 
@@ -230,13 +238,17 @@ if __name__ == '__main__':
     # Initialize index if it doesn't exist and upload folder is not empty
     if (index is None or not pdf_files) and os.listdir(app.config['UPLOAD_FOLDER']):
         logging.info("Initializing index from upload folder...")
-        index, pdf_files = initialize_index(
-            app.config['UPLOAD_FOLDER'],
-            INDEX_PATH,
-            PDF_FILES_PATH,
-            dimension,
-            model
-        )
+        try:
+            index, pdf_files = initialize_index(
+                app.config['UPLOAD_FOLDER'],
+                INDEX_PATH,
+                PDF_FILES_PATH,
+                dimension,
+                model
+            )
+        except Exception as e:
+            logging.exception(f"Failed to initialize index: {e}")
+            raise
 
     # Use app context for initialization
     with app.app_context():
@@ -245,4 +257,7 @@ if __name__ == '__main__':
         app.config['chat_history_store'] = {}
 
     # --- Run App ---
-    app.run(debug=True)
+    try:
+        app.run(debug=True)
+    except Exception as e:
+        logging.exception("Application failed to start: {}".format(e))
