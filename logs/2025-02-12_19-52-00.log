@@ -67,3 +67,9 @@
 2025-02-12 20:01:32,112 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
 2025-02-12 20:01:32,139 - INFO - Successfully generated answer for the query.
 2025-02-12 20:01:32,141 - INFO - 127.0.0.1 - - [12/Feb/2025 20:01:32] "POST /query HTTP/1.1" 200 -
+2025-02-12 20:08:39,968 - INFO - Successfully initialized vector store with 3546 documents.
+2025-02-12 20:08:41,074 - INFO - Successfully created conversational RAG chain.
+2025-02-12 20:08:41,074 - INFO - PDF data processed successfully.
+2025-02-12 20:08:41,076 - INFO - 127.0.0.1 - - [12/Feb/2025 20:08:41] "POST /process_pdf_rag_route HTTP/1.1" 200 -
+2025-02-12 20:08:41,078 - INFO - RAG chain re-initialized after file upload.
+2025-02-12 20:08:41,084 - INFO - 127.0.0.1 - - [12/Feb/2025 20:08:41] "POST / HTTP/1.1" 200 -

@@ -1,99 +1,172 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>PDF Uploader</title>
+    <title>PDF Powerhouse</title>
     <style>
+        /* OpenAI Chat Interface Colors & Font (Inter) */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            --background-color: #343541; /* Dark gray background */
+            --card-background: #40414f; /* Slightly lighter card background */
+            --text-color-primary: #d1d5db; /* Light gray text */
+            --text-color-secondary: #fff; /* White text for emphasis */
+            --accent-color: #10a37f; /* OpenAI's green accent */
+            --hover-color: #545669;  /* Hover background color */
+            --shadow-color: rgba(0, 0, 0, 0.3); /* Darker shadow for depth */
+            --cohere-font: 'Inter', sans-serif;
+            --border-radius: 8px;
+        }
+
         body {
-            font-family: sans-serif;
+            font-family: var(--cohere-font);
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            background-color: var(--background-color);
+            color: var(--text-color-primary);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
         .container {
-            width: 80%;
-            margin: 20px auto;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 1200px; /* Increased max-width */
+            margin: 30px auto;
+            background-color: var(--card-background);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 5px 20px var(--shadow-color);
+            transition: all 0.3s ease;
+        }
+
+        .container:hover {
+            box-shadow: 0 8px 25px var(--shadow-color);
         }
 
         h1 {
             text-align: center;
-            color: #333;
+            color: var(--text-color-secondary);
+            margin-bottom: 20px;
+            font-size: 2.5em;
+            letter-spacing: 1.5px;
         }
 
+        /* Upload Form Styling */
         #pdf-form {
-            margin-bottom: 20px;
-            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 15px; /* Reduced margin for tighter layout */
         }
 
         #pdf-form label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
+            font-size: 1.2em;
+            font-weight: 600;
+            color: var(--text-color-primary);
+            margin-bottom: 10px;
         }
 
         #pdf-form input[type="file"] {
-            width: 70%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 10px;  /* Reduced margin */
+            border: 2px dashed var(--accent-color); /* Use accent color for border */
+            border-radius: var(--border-radius);
             box-sizing: border-box;
+            transition: border-color 0.3s ease;
+            background-color: var(--background-color); /* Dark background for input */
+            color: var(--text-color-primary);
+        }
+
+        #pdf-form input[type="file"]:hover {
+            border-color: var(--text-color-secondary);
         }
 
         #pdf-form button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
+            background-color: var(--accent-color);
+            color: var(--text-color-secondary);
+            padding: 15px 30px;
             border: none;
-            border-radius: 4px;
+            border-radius: var(--border-radius);
             cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 3px 8px var(--shadow-color);
         }
 
         #pdf-form button:hover {
-            background-color: #3e8e41;
+            background-color: #0b8164; /* Darker green */
         }
 
+       .or-text {
+            text-align: center;
+            color: var(--text-color-primary);
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+
+
+        /* Buttons Container */
         .buttons-container {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
         }
 
         .option-button, .clear-button {
-            padding: 10px 20px;
+            padding: 15px 25px;
             border: none;
-            border-radius: 4px;
+            border-radius: var(--border-radius);
             cursor: pointer;
-            font-size: 16px;
+            font-size: 1.1em;
+            font-weight: 500;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 8px var(--shadow-color);
+            text-decoration: none;
+            display: block;
+            background-color: var(--card-background);
+            color: var(--text-color-primary);
+        }
+
+        .option-button:hover, .clear-button:hover {
+            background-color: var(--hover-color);
+            transform: translateY(-3px);
         }
 
         .option-button {
-            background-color: #007bff;
-            color: white;
-        }
-
-        .option-button:hover {
-            background-color: #0056b3;
+            color: var(--text-color-secondary);
         }
 
         .clear-button {
-            background-color: #dc3545;
-            color: white;
+            background-color: #e57373;
+            color: var(--text-color-secondary);
         }
 
-        .clear-button:hover {
-            background-color: #c82333;
-        }
-
-        #file-list {
+        /* Error Message */
+        .error-message {
+            color: #e57373;
             margin-top: 20px;
-            border-top: 1px solid #ccc;
-            padding-top: 10px;
+            padding: 15px;
+            border: 1px solid #e57373;
+            border-radius: var(--border-radius);
+            background-color: #545669; /* Darker background */
+            text-align: center;
+        }
+
+        /* File List */
+        #file-list {
+            margin-top: 30px;
+            border-top: 2px solid var(--accent-color); /* Accent color border */
+            padding-top: 20px;
+        }
+
+        #file-list h3 {
+            color: var(--text-color-secondary);
+            font-size: 1.4em;
+            margin-bottom: 15px;
         }
 
         #file-list ul {
@@ -102,59 +175,91 @@
         }
 
         #file-list li {
-            margin-bottom: 5px;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+            color: var(--text-color-primary);
+            padding: 12px 15px;
+            background-color: var(--background-color);
+            border-radius: var(--border-radius);
+            border-left: 4px solid var(--accent-color);
         }
 
-        .error-message {
-            color: red;
-            margin-top: 10px;
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: var(--card-background);
+            color: var(--text-color-primary);
+            margin-top: auto;
         }
 
+        /* Media Queries for Responsiveness */
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            #pdf-form input[type="file"] {
+                padding: 12px;
+            }
+
+            .buttons-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Hover state for the file list items */
+        #file-list li:hover {
+            background-color: var(--hover-color);
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Upload PDF Files</h1>
-        <form id="pdf-form" action="/" method="post" enctype="multipart/form-data">
-            <label for="pdf_files">Select PDF Files:</label>
-            <input type="file" id="pdf_files" name="pdf_files" accept=".pdf" multiple required>
-            <button type="submit">Upload</button>
-        </form>
 
+    <div class="container">
+        <h1>PDF Powerhouse</h1>
+
+        <form id="pdf-form" action="/" method="post" enctype="multipart/form-data">
+            <label for="pdf_files">Drag & Drop PDFs or Browse</label>
+            <input type="file" id="pdf_files" name="pdf_files" accept=".pdf" multiple required>
+            <button type="submit">Upload PDFs</button>
+        </form>
+         <p class="or-text">or</p>
         <div class="buttons-container">
-            <button class="option-button" id="btn1">Search PDFs</button>
-            <button class="option-button" id="btn2">Chat with PDFs</button>
-            <button class="option-button" id="btn3">Button 3</button>
-            <button class="clear-button">Clear</button>
+            <a href="/search_pdf_page" class="option-button">Search PDFs</a>
+            <a href="/pdf_chat_page" class="option-button">Chat with PDFs</a>
+            <a href="#" class="option-button">Analyze PDFs</a>
+            <button class="clear-button" onclick="location.reload();">Restart</button>
         </div>
 
         {% if error_message %}
-        <div class="error-message">
-            {{ error_message }}
-        </div>
+            <div class="error-message">
+                {{ error_message }}
+            </div>
         {% endif %}
 
         <div id="file-list">
             {% if file_paths %}
-            <h3>Uploaded Files:</h3>
-            <ul>
-                {% for file_path in file_paths %}
-                <li>{{ file_path }}</li>
-                {% endfor %}
-            </ul>
+                <h3>Uploaded PDFs:</h3>
+                <ul>
+                    {% for file_path in file_paths %}
+                        <li>{{ file_path }}</li>
+                    {% endfor %}
+                </ul>
             {% endif %}
         </div>
-
     </div>
 
-    <script>
-        document.getElementById('btn1').addEventListener('click', function() {
-            window.location.href = '/search_pdf_page'; // Redirect to search page
-        });
+    <footer>
+        <p>© 2024 PDF Powerhouse. All rights reserved. Created by Darshankumarr03@gmail.com.</p>
+    </footer>
 
-        document.getElementById('btn2').addEventListener('click', function() {
-            window.location.href = '/pdf_chat_page'; // Redirect to the pdf chat page
-        });
-    </script>
 </body>
 </html>

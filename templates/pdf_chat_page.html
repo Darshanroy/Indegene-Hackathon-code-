@@ -3,113 +3,283 @@
 <head>
     <title>PDF Chat</title>
     <style>
+        /* OpenAI Chat Interface Colors & Font (Poppins) */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            --background-color: #343541; /* Dark gray background */
+            --card-background: #40414f; /* Slightly lighter card background */
+            --text-color-primary: #d1d5db; /* Light gray text */
+            --text-color-secondary: #fff; /* White text for emphasis */
+            --accent-color: #10a37f; /* OpenAI's green accent */
+            --hover-color: #545669;  /* Hover background color */
+            --shadow-color: rgba(0, 0, 0, 0.3); /* Darker shadow for depth */
+            --cohere-font: 'Poppins', sans-serif;  /* Updated Font */
+            --border-radius: 8px;
+        }
+
         body {
-            font-family: Arial, sans-serif;
+            font-family: var(--cohere-font);
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            background-color: var(--background-color);
+            color: var(--text-color-primary);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
         .container {
-            width: 80%;
-            margin: 20px auto;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 90%; /* Take up more of the screen */
+            margin: 30px auto;
+            background-color: var(--card-background);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 5px 20px var(--shadow-color);
+             display: flex; /* Change to flex display */
+            flex-direction: column; /* Stack elements vertically */
         }
 
+        /* Sidebar (Top) */
+        .sidebar {
+            padding: 20px;
+            border-radius: var(--border-radius);
+            background-color: var(--background-color); /* Slightly darker */
+            display: flex;
+            flex-direction: row;  /* Display side by side */
+            justify-content: space-around;  /* Distribute items evenly */
+            margin-bottom: 20px; /* Spacing between sidebar and chat area */
+        }
+
+        .sidebar h2 {
+            color: var(--text-color-secondary);
+            margin-bottom: 15px;
+            font-size: 1.4em;
+            display:none;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+             display: flex; /* Make list horizontal */
+            justify-content: space-around; /* Space items evenly */
+        }
+
+        .sidebar li {
+            margin-bottom: 0; /* Remove bottom margin */
+        }
+
+        .sidebar a {
+            color: var(--text-color-primary);
+            text-decoration: none;
+            display: block;
+            padding: 8px 12px;
+            border-radius: var(--border-radius);
+            transition: background-color 0.3s ease;
+        }
+
+        .sidebar a:hover {
+            background-color: var(--hover-color);
+        }
+        .sidebar .navigation-button {
+            padding: 12px 24px;
+            background-color: var(--card-background);
+            color: var(--text-color-primary);
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+
+        .sidebar .navigation-button:hover {
+            background-color: var(--hover-color);
+            color: var(--text-color-secondary);
+        }
+
+        /* Responsive Sidebar */
+        @media (max-width: 768px) {
+            .container {
+                /*grid-template-columns: 1fr;  Stack sidebar on top */
+            }
+
+            .sidebar {
+                width: 100%;  /* Make sidebar full-width */
+                margin-bottom: 20px;
+                 flex-direction: column; /* Stack vertically on small screens */
+            }
+             .sidebar ul {
+                  flex-direction: column; /* Stack list items vertically */
+            }
+        }
+
+        /* Modern Chat Area (Right) */
         #chat-area {
-            border: 1px solid #ccc;
-            padding: 10px;
-            margin-bottom: 10px;
-            height: 300px;
-            overflow-y: scroll;
+            border: none; /* Remove border */
+            padding: 20px;
+            margin-bottom: 0;
+            height: 500px;
+            /* overflow-y: auto; */ /* Remove overflow from chat area */
+            background-color: var(--background-color); /* Consistent background */
+            border-radius: var(--border-radius);
+            display: flex;
+            flex-direction: column;  /* Stack messages */
         }
 
         .message {
-            padding: 8px;
-            margin-bottom: 5px;
-            border-radius: 5px;
-            word-break: break-word; /* Prevent long words from breaking layout */
+            padding: 12px 16px;
+            margin-bottom: 12px;
+            border-radius: var(--border-radius);
+            word-break: break-word;
+            max-width: 80%; /* Prevent messages from being too wide */
         }
 
         .user-message {
-            background-color: #e2f0cb;
-            text-align: right;
+            background-color: #545669;
+            color: var(--text-color-secondary);
+            align-self: flex-end; /* Align to the right */
         }
 
         .bot-message {
-            background-color: #f9f9f9;
-            text-align: left;
+            background-color: #4a4b59;
+            color: var(--text-color-primary);
+            align-self: flex-start; /* Align to the left */
         }
 
+        /* Input Area (at the bottom of Chat Area) */
         #input-area {
             display: flex;
+            align-items: center;
+            padding: 10px;
+            background-color: var(--card-background);
+            border-radius: var(--border-radius);
         }
 
         #question-input {
             flex-grow: 1;
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            margin-right: 5px;
+            padding: 12px;
+            border: none;
+            border-radius: var(--border-radius);
+            margin-right: 10px;
+            background-color: var(--background-color);
+            color: var(--text-color-primary);
+        }
+
+        #question-input::placeholder {
+            color: #8e9297;
         }
 
         #submit-button {
-            padding: 8px 15px;
-            background-color: #5cb85c;
-            color: white;
+            padding: 12px 24px;
+            background-color: var(--accent-color);
+            color: var(--text-color-secondary);
             border: none;
-            border-radius: 5px;
+            border-radius: var(--border-radius);
             cursor: pointer;
+            transition: background-color 0.3s ease;
         }
 
         #submit-button:hover {
-            background-color: #4cae4c;
+            background-color: #0b8164;
         }
 
         #status {
-            margin-top: 10px;
+            margin-top: 0px; /* Move to the top of the chat area */
+            margin-bottom: 10px; /* Add some space below */
             font-style: italic;
-            color: #888;
+            color: #8e9297;
+            text-align: center; /* Center the status message */
         }
 
-        #initialize-button {
-            padding: 8px 15px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-bottom: 10px; /* Add spacing between buttons */
+        /* Keyframes for Loading Animation (Optional) */
+        @keyframes pulse {
+            0% { opacity: 0.4; }
+            50% { opacity: 1; }
+            100% { opacity: 0.4; }
         }
 
-        #initialize-button:hover {
-            background-color: #0056b3;
+        .loading-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: var(--accent-color);
+            animation: pulse 1.5s infinite;
+            margin-left: 5px;
         }
+
+        .loading-indicator:nth-child(2) {
+            animation-delay: 0.3s;
+        }
+
+        .loading-indicator:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+
+
+         /* Message Container for scrolling */
+        .message-container {
+            overflow-y: auto; /* Add scroll to message container */
+            flex-grow: 1; /* Take up remaining space */
+            padding-bottom: 10px; /* Prevent input area overlap */
+            display: flex;
+            flex-direction: column;
+        }
+       .no-bottom-margin {
+            margin-bottom: 0 !important;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: var(--card-background);
+            color: var(--text-color-primary);
+            margin-top: auto; /* Push footer to the bottom */
+        }
+
+        .rights{
+            text-align: center;
+            color: var(--text-color-secondary);
+        }
+
 
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>PDF Chat</h1>
 
-<!--        <button id="initialize-button">Initialize PDF Chat</button> &lt;!&ndash; Explicit button for initialization &ndash;&gt;-->
+        <!-- Sidebar (Horizontal at Top) -->
+        <div class="sidebar">
+            <!--  <h2>Actions</h2> -->
+            <ul >
+                <li><a href="/"  class= "navigation-button">Back to Upload</a></li>
+                <li><a href="#" onclick="clearConversation(); return false;"  class= "navigation-button">Clear Conversation</a></li>
+                <li><a href="#" onclick="showSettingsAlert(); return false;"  class= "navigation-button">Settings</a></li>
+                <li><a href="#" onclick="showHelpInfo(); return false;"  class= "navigation-button">Help</a></li>
+            </ul>
+        </div>
 
+        <!-- Chat Area -->
         <div id="chat-area">
-            <!-- Chat messages will be displayed here -->
-        </div>
+            <div id="status">
+                <!-- Status messages will be displayed here -->
+            </div>
+            <div class = "message-container">
+                         <!-- Chat messages will be displayed here -->
+            </div>
+                <div id="input-area">
+                <input type="text" id="question-input" placeholder="Ask me anything about the PDFs!" />
+                <button id="submit-button">Send</button>
+            </div>
 
-        <div id="input-area">
-            <input type="text" id="question-input" placeholder="Ask me anything about the PDFs!" />
-            <button id="submit-button">Send</button>
-        </div>
-
-        <div id="status">
-            <!-- Status messages will be displayed here -->
         </div>
     </div>
+
+       <footer>
+            <p class="rights">© 2024 PDF Powerhouse. All rights reserved. Created by Darshankumarr03@gmail.com.</p>
+        </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/markdown-it@12.0.0/dist/markdown-it.min.js"></script>
     <script>
@@ -117,8 +287,7 @@
         const questionInput = document.getElementById('question-input');
         const submitButton = document.getElementById('submit-button');
         const statusArea = document.getElementById('status');
-        const initializeButton = document.getElementById('initialize-button');
-
+         const messageContainer = document.querySelector('.message-container');
         let sessionId = 'user_' + Date.now(); // Generate a unique session ID
 
         // Initialize Markdown-it
@@ -130,13 +299,14 @@
             messageDiv.classList.add('message');
             messageDiv.classList.add(sender + '-message');
             messageDiv.innerHTML = markdown.render(text); // Render Markdown
-            chatArea.appendChild(messageDiv);
-            chatArea.scrollTop = chatArea.scrollHeight;
+            messageContainer.appendChild(messageDiv);
+                messageContainer.scrollTop = messageContainer.scrollHeight - messageContainer.clientHeight;
+
         }
 
         // Function to handle sending a query to the backend
         function sendQuery(question) {
-            statusArea.textContent = "Loading...";
+            statusArea.innerHTML = "Loading <span class='loading-indicator'></span><span class='loading-indicator'></span><span class='loading-indicator'></span>";
             displayMessage(question, 'user');
 
             fetch('/query', {
@@ -160,8 +330,11 @@
                     statusArea.textContent = "Unexpected error.";
                 }
             })
-            .catch(error => {
-                statusArea.textContent = "Network error: " + error;
+             .catch(error => {
+                // Improved error handling: Display detailed error information
+                console.error("Fetch error:", error);  // Log the error for debugging
+                statusArea.textContent = "Network error: " + error.message + ". Please check your connection.";
+                // Optionally, provide more user-friendly guidance
             });
         }
 
@@ -181,37 +354,18 @@
             }
         });
 
-        // Initialize the PDF processing
-        function initializePDFProcessing() {
-            statusArea.textContent = "Initializing PDF processing...";
-            initializeButton.disabled = true;  // Disable the button during processing
-
-            fetch('/process_pdf_rag', { // Changed to /process_pdf_rag endpoint
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({}) // No need to send pdf_directory
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.message === "PDF data processed successfully.") {
-                    statusArea.textContent = "PDFs processed. You can now ask questions.";
-                } else if (data.error) {
-                    statusArea.textContent = "PDF processing error: " + data.error;
-                } else {
-                    statusArea.textContent = "Unexpected error during PDF processing.";
-                }
-                initializeButton.disabled = false; // Re-enable the button
-            })
-            .catch(error => {
-                statusArea.textContent = "Network error during PDF processing: " + error;
-                initializeButton.disabled = false; // Re-enable the button
-            });
+        // Clear Chat
+                function clearConversation() {
+            messageContainer.innerHTML = '';  // Clear all messages from the chat area
+            statusArea.textContent = "";  // Clear any status messages
+        }
+          function showSettingsAlert() {
+            alert("Settings are under development. Please check back later!");
         }
 
-        // Add event listener to the initialize button
-        initializeButton.addEventListener('click', initializePDFProcessing);
+          function showHelpInfo() {
+            alert("Contact Darshan: Darshankumarr03@gmail.com\nLinkedIn: https://www.linkedin.com/in/darshankumarr/");
+        }
 
     </script>
 </body>

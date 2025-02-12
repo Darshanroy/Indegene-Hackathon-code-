@@ -1,0 +1,68 @@
+2025-02-12 20:38:19,246 - WARNING - Hugging Face API token not found in environment.  Functionality might be limited.
+2025-02-12 20:38:19,252 - INFO - Use pytorch device_name: cpu
+2025-02-12 20:38:19,253 - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-02-12 20:38:25,687 - INFO - Loaded embedding model: all-MiniLM-L6-v2
+2025-02-12 20:38:25,688 - INFO - Loaded FAISS index and PDF files from disk.
+2025-02-12 20:38:25,710 - WARNING -  * Debugger is active!
+2025-02-12 20:38:25,718 - INFO -  * Debugger PIN: 118-960-469
+2025-02-12 20:38:25,750 - INFO - 127.0.0.1 - - [12/Feb/2025 20:38:25] "GET / HTTP/1.1" 200 -
+2025-02-12 20:38:25,753 - INFO - 127.0.0.1 - - [12/Feb/2025 20:38:25] "GET / HTTP/1.1" 200 -
+2025-02-12 20:38:34,620 - INFO - 127.0.0.1 - - [12/Feb/2025 20:38:34] "GET /search_pdf_page HTTP/1.1" 200 -
+2025-02-12 20:38:42,095 - INFO - Query received: pyspark
+2025-02-12 20:38:42,185 - INFO - Retrieved similar PDFs for query 'pyspark...': ['pyspark.pdf', 'ImP_PLots.pdf']
+2025-02-12 20:38:42,186 - INFO - Found similar PDFs: [{'filename': 'pyspark.pdf', 'download_link': 'http://localhost:5000/download/pyspark.pdf', 'embed_link': 'http://localhost:5000/view/pyspark.pdf'}, {'filename': 'ImP_PLots.pdf', 'download_link': 'http://localhost:5000/download/ImP_PLots.pdf', 'embed_link': 'http://localhost:5000/view/ImP_PLots.pdf'}]
+2025-02-12 20:38:42,187 - INFO - 127.0.0.1 - - [12/Feb/2025 20:38:42] "POST /search_pdf HTTP/1.1" 200 -
+2025-02-12 20:38:42,523 - INFO - Viewing PDF: pyspark.pdf
+2025-02-12 20:38:42,528 - INFO - Viewing PDF: ImP_PLots.pdf
+2025-02-12 20:38:42,747 - INFO - 127.0.0.1 - - [12/Feb/2025 20:38:42] "[36mGET /view/pyspark.pdf HTTP/1.1[0m" 304 -
+2025-02-12 20:38:42,750 - INFO - 127.0.0.1 - - [12/Feb/2025 20:38:42] "[36mGET /view/ImP_PLots.pdf HTTP/1.1[0m" 304 -
+2025-02-12 20:38:52,515 - INFO - 127.0.0.1 - - [12/Feb/2025 20:38:52] "GET / HTTP/1.1" 200 -
+2025-02-12 20:38:54,685 - INFO - 127.0.0.1 - - [12/Feb/2025 20:38:54] "GET /pdf_chat_page HTTP/1.1" 200 -
+2025-02-12 20:39:06,051 - INFO - Received a query request.
+2025-02-12 20:39:06,051 - WARNING - RAG chain or vector store is not initialized. Re-initializing...
+2025-02-12 20:39:08,631 - INFO - Use pytorch device_name: cpu
+2025-02-12 20:39:08,631 - INFO - Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2025-02-12 20:39:14,768 - INFO - Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+2025-02-12 20:39:15,619 - INFO - Successfully created conversational RAG chain.
+2025-02-12 20:39:19,258 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-12 20:39:19,295 - INFO - Successfully generated answer for the query.
+2025-02-12 20:39:19,296 - INFO - 127.0.0.1 - - [12/Feb/2025 20:39:19] "POST /query HTTP/1.1" 200 -
+2025-02-12 20:39:50,230 - INFO - Received a query request.
+2025-02-12 20:39:51,539 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-12 20:39:53,511 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-12 20:39:53,549 - INFO - Successfully generated answer for the query.
+2025-02-12 20:39:53,550 - INFO - 127.0.0.1 - - [12/Feb/2025 20:39:53] "POST /query HTTP/1.1" 200 -
+2025-02-12 20:40:08,447 - INFO - 127.0.0.1 - - [12/Feb/2025 20:40:08] "GET / HTTP/1.1" 200 -
+2025-02-12 20:40:16,598 - INFO - Sanitized filename from LLMS.pdf to LLMS.pdf
+2025-02-12 20:40:16,625 - INFO - Saved file 'LLMS.pdf' to database/upload/LLMS.pdf
+2025-02-12 20:40:16,625 - INFO - Loading PDFs from: database/upload/
+2025-02-12 20:40:16,626 - INFO - Processing database/upload/APPLICATION OF LLMS.pdf...
+2025-02-12 20:40:17,343 - INFO - Successfully extracted text from database/upload/APPLICATION OF LLMS.pdf
+2025-02-12 20:40:17,343 - INFO - Processing database/upload/Data Collection.pdf...
+2025-02-12 20:40:17,606 - INFO - Successfully extracted text from database/upload/Data Collection.pdf
+2025-02-12 20:40:17,606 - INFO - Processing database/upload/DS_Interview_GUIDE.pdf...
+2025-02-12 20:40:18,336 - INFO - Successfully extracted text from database/upload/DS_Interview_GUIDE.pdf
+2025-02-12 20:40:18,337 - INFO - Processing database/upload/ImP_PLots.pdf...
+2025-02-12 20:40:18,367 - INFO - Successfully extracted text from database/upload/ImP_PLots.pdf
+2025-02-12 20:40:18,368 - INFO - Processing database/upload/kUBERNETES.pdf...
+2025-02-12 20:40:19,219 - INFO - Successfully extracted text from database/upload/kUBERNETES.pdf
+2025-02-12 20:40:19,219 - INFO - Processing database/upload/LLMS.pdf...
+2025-02-12 20:40:20,616 - INFO - Successfully extracted text from database/upload/LLMS.pdf
+2025-02-12 20:40:20,617 - INFO - Processing database/upload/Natural Language Processing with Transformers Building Language Applications with Hugging Face by Lewis Tunstall  Leandro von Werra  Thomas Wolf.pdf...
+2025-02-12 20:40:22,751 - INFO - Successfully extracted text from database/upload/Natural Language Processing with Transformers Building Language Applications with Hugging Face by Lewis Tunstall  Leandro von Werra  Thomas Wolf.pdf
+2025-02-12 20:40:22,751 - INFO - Processing database/upload/pyspark.pdf...
+2025-02-12 20:40:25,941 - INFO - Successfully extracted text from database/upload/pyspark.pdf
+2025-02-12 20:40:25,941 - INFO - Processing database/upload/SQL_cheatsheet.pdf...
+2025-02-12 20:40:26,171 - INFO - Successfully extracted text from database/upload/SQL_cheatsheet.pdf
+2025-02-12 20:40:26,172 - INFO - Processing database/upload/Timetable - Google Sheets.pdf...
+2025-02-12 20:40:26,181 - INFO - Successfully extracted text from database/upload/Timetable - Google Sheets.pdf
+2025-02-12 20:40:41,749 - INFO - Stored 10 embeddings in FAISS index.
+2025-02-12 20:40:41,749 - INFO - Indexed 10 PDFs.
+2025-02-12 20:40:41,751 - INFO - FAISS index and PDF files saved to disk.
+2025-02-12 20:40:41,752 - INFO - FAISS index rebuilt after file upload.
+2025-02-12 20:40:43,796 - INFO - Processing PDF data for RAG chain...
+2025-02-12 20:40:54,420 - INFO - 127.0.0.1 - - [12/Feb/2025 20:40:54] "GET / HTTP/1.1" 200 -
+2025-02-12 20:40:55,519 - INFO - 127.0.0.1 - - [12/Feb/2025 20:40:55] "GET / HTTP/1.1" 200 -
+2025-02-12 20:40:55,769 - INFO - 127.0.0.1 - - [12/Feb/2025 20:40:55] "GET / HTTP/1.1" 200 -
+2025-02-12 20:40:56,082 - INFO - 127.0.0.1 - - [12/Feb/2025 20:40:56] "GET / HTTP/1.1" 200 -
+2025-02-12 20:40:57,110 - INFO - 127.0.0.1 - - [12/Feb/2025 20:40:57] "GET /pdf_chat_page HTTP/1.1" 200 -
