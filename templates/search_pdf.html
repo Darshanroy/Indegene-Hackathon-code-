@@ -135,16 +135,39 @@
             text-align: center;
         }
 
-        #results-list li a {
-            color: var(--accent-color);
+       #results-list li a {
+            margin: 5px; /* Add some spacing around the links */
+            padding: 8px 12px; /* Add padding for better clickability */
+            border-radius: var(--border-radius);
             text-decoration: none;
             font-weight: 500;
-            transition: color 0.3s ease;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            display: inline-block; /* Make the links inline-block */
         }
 
-        #results-list li a:hover {
+
+        #results-list li a.download-link {
+            color: var(--accent-color);
+            background-color: transparent;
+            border: 1px solid var(--accent-color);
+        }
+
+        #results-list li a.download-link:hover {
+            background-color: var(--accent-color);
             color: var(--text-color-secondary);
         }
+
+        #results-list li a.chat-link {
+            color: var(--text-color-secondary);
+            background-color: var(--hover-color); /* Use hover color for chat button */
+            border: 1px solid var(--hover-color);
+        }
+        #results-list li a.chat-link:hover {
+            background-color: var(--background-color);
+             color: var(--accent-color);
+        }
+
+
 
         /* PDF Container */
         .pdf-container {
@@ -291,26 +314,34 @@
                         data.results.forEach(result => {
                             const li = document.createElement('li');
 
-                            //Filename
-                            const filename = document.createElement('span');
-                            filename.textContent = `Filename: ${result.filename}`;
-                            li.appendChild(filename);
+                            // Filename
+                            const filenameSpan = document.createElement('span');
+                            filenameSpan.textContent = `Filename: ${result.filename}`;
+                            li.appendChild(filenameSpan);
 
-                            //Download Link
+                            // Download Link
                             const downloadLink = document.createElement('a');
                             downloadLink.href = result.download_link;
                             downloadLink.textContent = 'Download';
                             downloadLink.download = result.filename;
+                            downloadLink.classList.add('download-link'); // Add class for styling
                             li.appendChild(downloadLink);
 
-                            //PDF Embed
+                            // Chat Link -  Added this!
+                            const chatLink = document.createElement('a');
+                            chatLink.href = result.chat_link;
+                            chatLink.textContent = 'Chat with PDF';
+                            chatLink.classList.add('chat-link');  // Add class for styling
+                            li.appendChild(chatLink); // Append to the list item
+
+
+                            // PDF Embed
                             const pdfEmbed = document.createElement('iframe');
                             pdfEmbed.src = result.embed_link;
                             pdfEmbed.classList.add('pdf-container');
                             li.appendChild(pdfEmbed);
 
                             resultsList.appendChild(li);
-
                         });
                     } else if (data.error) {
                         resultsList.innerHTML = `<li class="no-results">Error: ${data.error}</li>`;
@@ -320,25 +351,25 @@
                 })
                 .catch(error => {
                     console.error('Error:', error);
-                    resultsList.innerHTML = `<li class="no-results">An error occurred while searching. Please try again.</li>`;
+                    document.getElementById('results-list').innerHTML = `<li class="no-results">An error occurred.  Please check your network connection and try again.</li>`;
                 });
             } else {
                 alert('Please enter a search query.');
             }
         });
 
-    function clearSearch() {
-        document.getElementById('results-list').innerHTML = ''; // Clear results
-        document.getElementById('search-input').value = ''; // Clear the search bar
-    }
+        function clearSearch() {
+            document.getElementById('results-list').innerHTML = '';
+            document.getElementById('search-input').value = '';
+        }
+        function showSettingsAlert() {
+            alert("Settings are under development. Please check back later!");
+        }
 
-     function showSettingsAlert() {
-                alert("Settings are under development. Please check back later!");
-            }
+        function showHelpInfo() {
+            alert("Contact Darshan: Darshankumarr03@gmail.com\nLinkedIn: https://www.linkedin.com/in/darshankumarr/");
+        }
 
-     function showHelpInfo() {
-                alert("Contact Darshan: Darshankumarr03@gmail.com\nLinkedIn: https://www.linkedin.com/in/darshankumarr/");
-            }
     </script>
 </body>
 </html>

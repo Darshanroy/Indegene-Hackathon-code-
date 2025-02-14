@@ -1,10 +1,19 @@
-# rag_utils.py
+# No significant changes, BUT make sure these functions are defined:
+# - initialize_vector_store
+# - create_conversational_rag_chain
+# - load_documents_from_directory
+# - CHROMA_DB_PATH (This should be a constant defining the path)
+
+# These functions are already defined in your original rag_utils.py,
+# so no changes are needed *inside* these functions for this specific feature.
+# The key is that faiss_utils.py now *calls* them to create per-document stores.
+# Just added one import at the top
 import os
 import json
-from langchain_community.document_loaders import PyPDFDirectoryLoader
+from langchain_community.document_loaders import PyPDFDirectoryLoader, PyPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_groq import ChatGroq
-from langchain_cohere import CohereEmbeddings  # Correct import
+from langchain_cohere import CohereEmbeddings
 from langchain_huggingface.embeddings import HuggingFaceEmbeddings
 from langchain_chroma import Chroma
 from langchain_core.chat_history import BaseChatMessageHistory
@@ -46,24 +55,28 @@ def get_chat_session_history(session_id: str, app: Flask) -> BaseChatMessageHist
 
 
 def load_documents_from_directory(directory_path):
-    """Loads PDF documents from a directory using PyPDFDirectoryLoader."""
+    """Loads PDF documents from a directory using PyPDFDirectoryLoader, or a single PDF using PyPDFLoader."""
     try:
         if not os.path.exists(directory_path):
-            logging.error(f"Directory '{directory_path}' not found.")
+            logging.error(f"Directory or file '{directory_path}' not found.")
             return None
 
-        loader = PyPDFDirectoryLoader(directory_path)
+        # Check if the path is a directory or a single file
+        if os.path.isdir(directory_path):
+            loader = PyPDFDirectoryLoader(directory_path)
+        else:  # Assume it's a single file
+            loader = PyPDFLoader(directory_path)
+
         try:
             documents = loader.load()
             logging.info(f"Successfully loaded {len(documents)} documents from {directory_path}")
             return documents
         except Exception as e:
-            logging.exception(f"Error loading documents from directory: {e}")
+            logging.exception(f"Error loading documents from directory/file: {e}")
             return None
     except Exception as e:
-        logging.exception(f"Unexpected error loading document from the directory: {e}")
+        logging.exception(f"Unexpected error loading document from the directory/file: {e}")
         return None
-
 
 def initialize_vector_store(documents):
     """Initializes and populates a Chroma vector store from a list of documents."""

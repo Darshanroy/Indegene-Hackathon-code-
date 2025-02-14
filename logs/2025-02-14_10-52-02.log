@@ -1,0 +1,12 @@
+2025-02-14 10:52:02,829 - WARNING - Hugging Face API token not found in environment.  Functionality might be limited.
+2025-02-14 10:52:02,832 - INFO - Use pytorch device_name: cpu
+2025-02-14 10:52:02,832 - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-02-14 10:52:06,565 - INFO - Loaded embedding model: all-MiniLM-L6-v2
+2025-02-14 10:52:06,566 - INFO - Loaded FAISS index and PDF files from disk.
+2025-02-14 10:52:07,463 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.68.106.103:5000
+2025-02-14 10:52:07,468 - INFO - [33mPress CTRL+C to quit[0m
+2025-02-14 10:52:07,471 - INFO -  * Restarting with stat
+2025-02-14 11:01:44,972 - INFO -  * Restarting with stat

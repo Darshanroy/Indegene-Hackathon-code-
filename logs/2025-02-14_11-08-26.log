@@ -1,0 +1,75 @@
+2025-02-14 11:08:26,806 - WARNING - Hugging Face API token not found in environment.  Functionality might be limited.
+2025-02-14 11:08:26,808 - INFO - Use pytorch device_name: cpu
+2025-02-14 11:08:26,808 - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-02-14 11:08:31,903 - INFO - Loaded embedding model: all-MiniLM-L6-v2
+2025-02-14 11:08:31,905 - INFO - Loaded FAISS index and PDF files from disk.
+2025-02-14 11:08:31,922 - WARNING -  * Debugger is active!
+2025-02-14 11:08:31,930 - INFO -  * Debugger PIN: 118-960-469
+2025-02-14 11:08:31,971 - INFO - 127.0.0.1 - - [14/Feb/2025 11:08:31] "GET / HTTP/1.1" 200 -
+2025-02-14 11:08:33,274 - INFO - 127.0.0.1 - - [14/Feb/2025 11:08:33] "GET /search_pdf_page HTTP/1.1" 200 -
+2025-02-14 11:08:49,109 - INFO - Query received: 7.2.1 Morphology
+2025-02-14 11:08:49,391 - INFO - Retrieved similar PDFs for query '7.2.1 Morphology...': ['kebo105.pdf', 'kebo102.pdf']
+2025-02-14 11:08:49,391 - INFO - Creating new RAG chain for kebo105.pdf
+2025-02-14 11:09:11,381 - INFO - Successfully loaded 16 documents from database/upload/kebo105.pdf
+2025-02-14 11:09:11,396 - INFO - Use pytorch device_name: cpu
+2025-02-14 11:09:11,397 - INFO - Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2025-02-14 11:09:15,589 - INFO - Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+2025-02-14 11:09:20,993 - INFO - Successfully initialized vector store with 50 documents.
+2025-02-14 11:09:23,191 - INFO - Successfully created conversational RAG chain.
+2025-02-14 11:09:23,191 - INFO - Creating new RAG chain for kebo102.pdf
+2025-02-14 11:09:47,646 - INFO - Query received: 7.2.1 Morphology
+2025-02-14 11:09:50,418 - INFO - Successfully loaded 13 documents from database/upload/kebo102.pdf
+2025-02-14 11:09:50,432 - INFO - Use pytorch device_name: cpu
+2025-02-14 11:09:50,433 - INFO - Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2025-02-14 11:09:50,449 - INFO - Retrieved similar PDFs for query '7.2.1 Morphology...': ['kebo105.pdf', 'kebo102.pdf']
+2025-02-14 11:09:50,449 - INFO - Retrieving existing RAG chain for kebo105.pdf
+2025-02-14 11:09:50,450 - INFO - Creating new RAG chain for kebo102.pdf
+2025-02-14 11:10:16,437 - INFO - Query received: 7.2.1 Morphology
+2025-02-14 11:10:21,833 - INFO - Retrieved similar PDFs for query '7.2.1 Morphology...': ['kebo105.pdf', 'kebo102.pdf']
+2025-02-14 11:10:21,834 - INFO - Retrieving existing RAG chain for kebo105.pdf
+2025-02-14 11:10:21,849 - INFO - Creating new RAG chain for kebo102.pdf
+2025-02-14 11:10:25,111 - INFO - Successfully loaded 13 documents from database/upload/kebo102.pdf
+2025-02-14 11:10:25,128 - INFO - Use pytorch device_name: cpu
+2025-02-14 11:10:25,128 - INFO - Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2025-02-14 11:10:25,277 - INFO - Successfully initialized vector store with 49 documents.
+2025-02-14 11:10:26,976 - INFO - Successfully created conversational RAG chain.
+2025-02-14 11:10:26,976 - INFO - Found similar PDFs: [{'filename': 'kebo105.pdf', 'download_link': 'http://localhost:5000/download/kebo105.pdf', 'embed_link': 'http://localhost:5000/view/kebo105.pdf', 'chat_link': 'http://localhost:5000/pdf_specific_chat_page/kebo105.pdf'}, {'filename': 'kebo102.pdf', 'download_link': 'http://localhost:5000/download/kebo102.pdf', 'embed_link': 'http://localhost:5000/view/kebo102.pdf', 'chat_link': 'http://localhost:5000/pdf_specific_chat_page/kebo102.pdf'}]
+2025-02-14 11:10:26,977 - INFO - 127.0.0.1 - - [14/Feb/2025 11:10:26] "POST /search_pdf HTTP/1.1" 200 -
+2025-02-14 11:10:27,395 - INFO - Viewing PDF: kebo105.pdf
+2025-02-14 11:10:27,457 - INFO - Viewing PDF: kebo102.pdf
+2025-02-14 11:10:27,504 - INFO - 127.0.0.1 - - [14/Feb/2025 11:10:27] "[36mGET /view/kebo105.pdf HTTP/1.1[0m" 304 -
+2025-02-14 11:10:27,567 - INFO - 127.0.0.1 - - [14/Feb/2025 11:10:27] "[36mGET /view/kebo102.pdf HTTP/1.1[0m" 304 -
+2025-02-14 11:10:51,813 - INFO - Successfully loaded 13 documents from database/upload/kebo102.pdf
+2025-02-14 11:10:51,827 - INFO - Use pytorch device_name: cpu
+2025-02-14 11:10:51,827 - INFO - Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2025-02-14 11:10:51,949 - INFO - Successfully initialized vector store with 49 documents.
+2025-02-14 11:10:52,876 - INFO - Successfully created conversational RAG chain.
+2025-02-14 11:10:52,877 - INFO - Found similar PDFs: [{'filename': 'kebo105.pdf', 'download_link': 'http://localhost:5000/download/kebo105.pdf', 'embed_link': 'http://localhost:5000/view/kebo105.pdf', 'chat_link': 'http://localhost:5000/pdf_specific_chat_page/kebo105.pdf'}, {'filename': 'kebo102.pdf', 'download_link': 'http://localhost:5000/download/kebo102.pdf', 'embed_link': 'http://localhost:5000/view/kebo102.pdf', 'chat_link': 'http://localhost:5000/pdf_specific_chat_page/kebo102.pdf'}]
+2025-02-14 11:10:52,877 - INFO - 127.0.0.1 - - [14/Feb/2025 11:10:52] "POST /search_pdf HTTP/1.1" 200 -
+2025-02-14 11:10:53,214 - INFO - Viewing PDF: kebo105.pdf
+2025-02-14 11:10:53,215 - INFO - 127.0.0.1 - - [14/Feb/2025 11:10:53] "[36mGET /view/kebo105.pdf HTTP/1.1[0m" 304 -
+2025-02-14 11:10:53,216 - INFO - Viewing PDF: kebo102.pdf
+2025-02-14 11:10:53,219 - INFO - 127.0.0.1 - - [14/Feb/2025 11:10:53] "[36mGET /view/kebo102.pdf HTTP/1.1[0m" 304 -
+2025-02-14 11:10:58,134 - INFO - Successfully initialized vector store with 49 documents.
+2025-02-14 11:10:59,101 - INFO - Successfully created conversational RAG chain.
+2025-02-14 11:10:59,102 - INFO - Found similar PDFs: [{'filename': 'kebo105.pdf', 'download_link': 'http://localhost:5000/download/kebo105.pdf', 'embed_link': 'http://localhost:5000/view/kebo105.pdf', 'chat_link': 'http://localhost:5000/pdf_specific_chat_page/kebo105.pdf'}, {'filename': 'kebo102.pdf', 'download_link': 'http://localhost:5000/download/kebo102.pdf', 'embed_link': 'http://localhost:5000/view/kebo102.pdf', 'chat_link': 'http://localhost:5000/pdf_specific_chat_page/kebo102.pdf'}]
+2025-02-14 11:10:59,102 - INFO - 127.0.0.1 - - [14/Feb/2025 11:10:59] "POST /search_pdf HTTP/1.1" 200 -
+2025-02-14 11:10:59,433 - INFO - Viewing PDF: kebo105.pdf
+2025-02-14 11:10:59,435 - INFO - 127.0.0.1 - - [14/Feb/2025 11:10:59] "[36mGET /view/kebo105.pdf HTTP/1.1[0m" 304 -
+2025-02-14 11:10:59,436 - INFO - Viewing PDF: kebo102.pdf
+2025-02-14 11:10:59,437 - INFO - 127.0.0.1 - - [14/Feb/2025 11:10:59] "[36mGET /view/kebo102.pdf HTTP/1.1[0m" 304 -
+2025-02-14 11:12:38,442 - INFO - 127.0.0.1 - - [14/Feb/2025 11:12:38] "GET /pdf_specific_chat_page/kebo105.pdf HTTP/1.1" 200 -
+2025-02-14 11:15:23,769 - INFO - Query received: 7.2.1 Morphology
+2025-02-14 11:15:23,787 - INFO - Retrieved similar PDFs for query '7.2.1 Morphology...': ['kebo105.pdf', 'kebo102.pdf']
+2025-02-14 11:15:23,787 - INFO - Retrieving existing RAG chain for kebo105.pdf
+2025-02-14 11:15:23,787 - INFO - Retrieving existing RAG chain for kebo102.pdf
+2025-02-14 11:15:23,788 - INFO - Found similar PDFs: [{'filename': 'kebo105.pdf', 'download_link': 'http://localhost:5000/download/kebo105.pdf', 'embed_link': 'http://localhost:5000/view/kebo105.pdf', 'chat_link': 'http://localhost:5000/pdf_specific_chat_page/kebo105.pdf'}, {'filename': 'kebo102.pdf', 'download_link': 'http://localhost:5000/download/kebo102.pdf', 'embed_link': 'http://localhost:5000/view/kebo102.pdf', 'chat_link': 'http://localhost:5000/pdf_specific_chat_page/kebo102.pdf'}]
+2025-02-14 11:15:23,788 - INFO - 127.0.0.1 - - [14/Feb/2025 11:15:23] "POST /search_pdf HTTP/1.1" 200 -
+2025-02-14 11:15:23,799 - INFO - Viewing PDF: kebo105.pdf
+2025-02-14 11:15:23,800 - INFO - 127.0.0.1 - - [14/Feb/2025 11:15:23] "[36mGET /view/kebo105.pdf HTTP/1.1[0m" 304 -
+2025-02-14 11:15:24,103 - INFO - Viewing PDF: kebo102.pdf
+2025-02-14 11:15:24,104 - INFO - 127.0.0.1 - - [14/Feb/2025 11:15:24] "[36mGET /view/kebo102.pdf HTTP/1.1[0m" 304 -
+2025-02-14 11:15:25,295 - INFO - 127.0.0.1 - - [14/Feb/2025 11:15:25] "GET /pdf_specific_chat_page/kebo105.pdf HTTP/1.1" 200 -
+2025-02-14 11:15:33,824 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-14 11:15:33,853 - INFO - 127.0.0.1 - - [14/Feb/2025 11:15:33] "POST /chat_with_specific_pdf HTTP/1.1" 200 -
+2025-02-14 11:15:49,360 - INFO - 127.0.0.1 - - [14/Feb/2025 11:15:49] "GET / HTTP/1.1" 200 -

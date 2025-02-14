@@ -1,3 +1,4 @@
+# app.py (Imports and setup - same as before)
 from flask import Flask, render_template, request, redirect, url_for, jsonify, send_from_directory
 import os
 from pymongo import MongoClient
@@ -26,9 +27,10 @@ from langchain.chains.combine_documents import create_stuff_documents_chain
 from dotenv import load_dotenv
 import logging  # Import logging
 from datetime import datetime  # Import datetime
-from faiss_utils import process_search_request, initialize_index, load_index_and_files, sanitize_filename
-from rag_utils import process_pdf_rag, query_rag_chain
+from faiss_utils import process_search_request, initialize_index, load_index_and_files, sanitize_filename, get_or_create_pdf_rag_chain
+from rag_utils import process_pdf_rag, query_rag_chain, load_documents_from_directory
 import requests
+
 
 # --- Logging Configuration ---
 LOG_FOLDER = 'logs'
@@ -100,6 +102,7 @@ def load_embedding_model(model_name):
     except Exception as e:
         logging.exception(f"Error loading embedding model: {e}")
         return None
+
 
 # --- Flask Routes ---
 @app.route('/', methods=['GET', 'POST'])
@@ -179,9 +182,9 @@ def search_pdf():
         return jsonify({"error": "Query is required"}), 400
 
     try:
-        # Pass upload_folder
-        response = process_search_request(query, index, pdf_files, model, app.config['UPLOAD_FOLDER'])
-        return jsonify(response)  # The processed response with filenames, download, and embed link
+        # Pass upload_folder and app
+        response = process_search_request(query, index, pdf_files, model, app.config['UPLOAD_FOLDER'], app)
+        return jsonify(response)  # The processed response with filenames, download, and embed link, and chat link
     except Exception as e:
         logging.exception(f"Error during search: {e}")
         return jsonify({"error": "An error occurred during the search."}), 500
@@ -209,11 +212,48 @@ def process_pdf_rag_route():
 
 @app.route('/query', methods=['POST'])
 def query():
-    """Endpoint to query the RAG chain."""
+    """Endpoint to query the RAG chain (for the general chat)."""
     data = request.get_json()
     user_question = data.get('question')
-    session_id = data.get('session_id', 'default_session')
+    session_id = data.get('session_id', 'default_session')  # Use a default session ID if none provided
     return query_rag_chain(user_question, session_id, app)
+
+@app.route('/pdf_specific_chat_page/<filename>')
+def pdf_specific_chat_page(filename):
+    """Renders a chat page for a specific PDF."""
+    return render_template('pdf_specific_chat.html', filename=filename)
+
+@app.route('/chat_with_specific_pdf', methods=['POST'])
+def chat_with_specific_pdf():
+    """Chats with a specific PDF using its dedicated RAG chain."""
+    data = request.get_json()
+    user_question = data.get('question')
+    filename = data.get('filename')
+    session_id = data.get('session_id', 'default_session')
+
+    if not user_question or not filename:
+        return jsonify({"error": "Missing question or filename."}), 400
+
+    try:
+        # Construct the key used to store the document-specific RAG chain
+        rag_chain_key = f"rag_chain_{filename}"
+
+        # Retrieve the correct RAG chain from the app's config
+        conversational_rag_chain = app.config.get(rag_chain_key)
+        if conversational_rag_chain is None:
+            return jsonify({
+                               "error": "Chat with this document is not available."}), 404  # Or 500, depending on how you want to handle
+
+        # Use the retrieved RAG chain to answer the question
+        response = conversational_rag_chain.invoke(
+            {"input": user_question},
+            config={"configurable": {"session_id": session_id}},  # Use a session ID
+        )
+        return jsonify({"answer": response['answer']})
+
+    except Exception as e:
+        logging.exception(f"Error chatting with specific PDF {filename}: {e}")
+        return jsonify({"error": f"Error chatting with PDF: {e}"}), 500
 
 # --- Initialization ---
 if __name__ == '__main__':
@@ -252,9 +292,9 @@ if __name__ == '__main__':
 
     # Use app context for initialization
     with app.app_context():
-        app.config['conversational_rag_chain'] = None
+        app.config['conversational_rag_chain'] = None  # Global RAG chain
         app.config['vector_store'] = None
-        app.config['chat_history_store'] = {}
+        app.config['chat_history_store'] = {}  # Chat history
 
     # --- Run App ---
     try:

@@ -5,10 +5,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e7ec3e59-96dd-4fa0-aac2-577037332b52" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/indexing/chroma_langchain_db/chroma.sqlite3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/indexing/chroma_langchain_db/dd953da3-2b98-476b-bbb5-750c6182cffa/data_level0.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/indexing/chroma_langchain_db/dd953da3-2b98-476b-bbb5-750c6182cffa/header.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/indexing/chroma_langchain_db/dd953da3-2b98-476b-bbb5-750c6182cffa/index_metadata.pickle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/indexing/chroma_langchain_db/dd953da3-2b98-476b-bbb5-750c6182cffa/length.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/indexing/chroma_langchain_db/dd953da3-2b98-476b-bbb5-750c6182cffa/link_lists.bin" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/database/indexing/faiss_index.bin" beforeDir="false" afterPath="$PROJECT_DIR$/database/indexing/faiss_index.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/indexing/pdf_files.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/database/indexing/pdf_files.pkl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/upload/APPLICATION OF LLMS.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/upload/DS_Interview_GUIDE.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/upload/Darshan_Kumar_R_-_Internship_Certificate.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/upload/Data Collection.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/upload/ImP_PLots.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/upload/LLMS.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/upload/Natural Language Processing with Transformers Building Language Applications with Hugging Face by Lewis Tunstall  Leandro von Werra  Thomas Wolf.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/upload/SQL_cheatsheet.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/upload/Timetable - Google Sheets.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/upload/kUBERNETES.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/upload/pyspark.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/faiss_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/faiss_utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rag_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/rag_utils.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/search_pdf.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/search_pdf.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -38,14 +58,15 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;Python.main.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "Python.main.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\91845\Desktop\indegene-hackathon\prototype\templates" />

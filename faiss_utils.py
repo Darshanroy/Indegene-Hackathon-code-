@@ -6,8 +6,14 @@ import faiss
 import numpy as np
 import pickle
 from sentence_transformers import SentenceTransformer
-import logging  # Import logging
-from flask import url_for
+import logging
+from flask import url_for, jsonify
+from rag_utils import initialize_vector_store, create_conversational_rag_chain, load_documents_from_directory, CHROMA_DB_PATH  # Import necessary functions
+from langchain_groq import ChatGroq # Import
+from dotenv import load_dotenv
+
+load_dotenv()
+GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 
 def sanitize_filename(filename):
     """Sanitizes a filename."""
@@ -139,34 +145,83 @@ def retrieve_similar_pdfs(query, index_instance, pdf_files_list, model_instance,
         logging.exception(f"Error retrieving similar PDFs: {e}")
         return []
 
-def process_search_request(query, index_instance, pdf_files_list, model_instance, upload_folder):
-    """Processes a search request, retrieves similar PDFs."""
-    # Extract Query from Request
-    logging.info(f"Query received: {query}")
 
-    # Generate Embedding for Query
+def get_or_create_pdf_rag_chain(app, filename, upload_folder):
+    """Gets or creates a RAG chain for a specific PDF."""
+    try:
+        # Create a unique key for this PDF's RAG chain, including the filename
+        rag_chain_key = f"rag_chain_{filename}"
+
+        # Try to retrieve the RAG chain from the app's config
+        if rag_chain_key in app.config:
+            logging.info(f"Retrieving existing RAG chain for {filename}")
+            return app.config[rag_chain_key]
+
+        # If not found, create a new RAG chain and store it
+        logging.info(f"Creating new RAG chain for {filename}")
+        pdf_path = os.path.join(upload_folder, filename)
+        documents = load_documents_from_directory(pdf_path)  # Load single PDF
+
+        if not documents:
+             logging.error(f"Failed to load document: {filename}")
+             return None
+        vector_store = initialize_vector_store(documents)  # Vector store for single PDF
+        if not vector_store:
+            logging.error(f"Failed to initialize vector store for {filename}")
+            return None
+        llm = ChatGroq(api_key=GROQ_API_KEY, model_name="llama-3.1-8b-instant")
+        conversational_rag_chain = create_conversational_rag_chain(llm, vector_store, app)
+
+        if conversational_rag_chain is None:
+            logging.error(f"Failed to create RAG chain for {filename}")
+            return None
+        app.config[rag_chain_key] = conversational_rag_chain
+        return conversational_rag_chain
+    except Exception as e:
+        logging.exception(f"Error in get_or_create_pdf_rag_chain for {filename}: {e}")
+        return None
+
+def process_search_request(query, index_instance, pdf_files_list, model_instance, upload_folder, app): #Added app
+    """Processes a search request and prepares for per-document chat."""
+    logging.info(f"Query received: {query}")
     try:
         similar_pdfs = retrieve_similar_pdfs(query, index_instance, pdf_files_list, model_instance)
     except Exception as e:
         logging.exception(f"Error during search: {e}")
         return {"error": "An error occurred during the search."}
 
-    # Create response with filename, download link, and embed link for each PDF
     results = []
     for filename in similar_pdfs:
         try:
-            download_link = url_for('download_pdf', filename=filename, _external=True)  # Generates the fully qualified URL
-            embed_link = url_for('view_pdf', filename=filename, _external=True)  # Create an URL endpoint to render the PDF
+            # Get or create the RAG chain for the specific PDF.
+            rag_chain = get_or_create_pdf_rag_chain(app, filename, upload_folder)  # Pass 'app'
+
+
+            if rag_chain is None: # Handling the None
+                logging.error(f"Could not create or retrieve RAG chain for {filename}")
+                results.append({
+                    "filename": filename,
+                    "error": "Could not initialize chat for this document."
+                })
+                continue
+
+
+            download_link = url_for('download_pdf', filename=filename, _external=True)
+            embed_link = url_for('view_pdf', filename=filename, _external=True)
+            chat_link = url_for('pdf_specific_chat_page', filename=filename, _external=True)  # New chat link
+
             results.append({
                 "filename": filename,
                 "download_link": download_link,
-                "embed_link": embed_link
+                "embed_link": embed_link,
+                "chat_link": chat_link,  # Add the chat link to the result
+
             })
         except Exception as e:
-            logging.exception(f"Error generating URL for {filename}: {e}")
+            logging.exception(f"Error processing {filename}: {e}")
             results.append({
                 "filename": filename,
-                "error": "Could not generate download/embed link"
+                "error": "Could not process this document."
             })
 
     logging.info(f"Found similar PDFs: {results}")

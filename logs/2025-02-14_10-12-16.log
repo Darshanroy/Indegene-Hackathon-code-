@@ -1,0 +1,7 @@
+2025-02-14 10:12:17,002 - WARNING - Hugging Face API token not found in environment.  Functionality might be limited.
+2025-02-14 10:12:17,007 - INFO - Use pytorch device_name: cpu
+2025-02-14 10:12:17,007 - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-02-14 10:12:20,814 - INFO - Loaded embedding model: all-MiniLM-L6-v2
+2025-02-14 10:12:20,815 - INFO - Loaded FAISS index and PDF files from disk.
+2025-02-14 10:12:20,829 - WARNING -  * Debugger is active!
+2025-02-14 10:12:20,836 - INFO -  * Debugger PIN: 118-960-469

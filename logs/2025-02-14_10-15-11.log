@@ -1,0 +1,123 @@
+2025-02-14 10:15:11,155 - WARNING - Hugging Face API token not found in environment.  Functionality might be limited.
+2025-02-14 10:15:11,157 - INFO - Use pytorch device_name: cpu
+2025-02-14 10:15:11,157 - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-02-14 10:15:16,042 - INFO - Loaded embedding model: all-MiniLM-L6-v2
+2025-02-14 10:15:16,043 - INFO - Loaded FAISS index and PDF files from disk.
+2025-02-14 10:15:16,054 - WARNING -  * Debugger is active!
+2025-02-14 10:15:16,059 - INFO -  * Debugger PIN: 118-960-469
+2025-02-14 10:15:16,130 - INFO - 127.0.0.1 - - [14/Feb/2025 10:15:16] "GET / HTTP/1.1" 200 -
+2025-02-14 10:15:16,379 - INFO - 127.0.0.1 - - [14/Feb/2025 10:15:16] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-02-14 10:15:37,849 - INFO - Sanitized filename from kebo115.pdf to kebo115.pdf
+2025-02-14 10:15:37,865 - INFO - Saved file 'kebo115.pdf' to database/upload/kebo115.pdf
+2025-02-14 10:15:37,865 - INFO - Sanitized filename from kebo116.pdf to kebo116.pdf
+2025-02-14 10:15:37,874 - INFO - Saved file 'kebo116.pdf' to database/upload/kebo116.pdf
+2025-02-14 10:15:37,875 - INFO - Sanitized filename from kebo117.pdf to kebo117.pdf
+2025-02-14 10:15:37,900 - INFO - Saved file 'kebo117.pdf' to database/upload/kebo117.pdf
+2025-02-14 10:15:37,901 - INFO - Sanitized filename from kebo118.pdf to kebo118.pdf
+2025-02-14 10:15:37,917 - INFO - Saved file 'kebo118.pdf' to database/upload/kebo118.pdf
+2025-02-14 10:15:37,917 - INFO - Sanitized filename from kebo119.pdf to kebo119.pdf
+2025-02-14 10:15:37,926 - INFO - Saved file 'kebo119.pdf' to database/upload/kebo119.pdf
+2025-02-14 10:15:37,926 - INFO - Sanitized filename from kebo106.pdf to kebo106.pdf
+2025-02-14 10:15:37,934 - INFO - Saved file 'kebo106.pdf' to database/upload/kebo106.pdf
+2025-02-14 10:15:37,935 - INFO - Sanitized filename from kebo107.pdf to kebo107.pdf
+2025-02-14 10:15:37,938 - INFO - Saved file 'kebo107.pdf' to database/upload/kebo107.pdf
+2025-02-14 10:15:37,939 - INFO - Sanitized filename from kebo108.pdf to kebo108.pdf
+2025-02-14 10:15:37,978 - INFO - Saved file 'kebo108.pdf' to database/upload/kebo108.pdf
+2025-02-14 10:15:37,979 - INFO - Sanitized filename from kebo109.pdf to kebo109.pdf
+2025-02-14 10:15:37,984 - INFO - Saved file 'kebo109.pdf' to database/upload/kebo109.pdf
+2025-02-14 10:15:37,984 - INFO - Sanitized filename from kebo110.pdf to kebo110.pdf
+2025-02-14 10:15:37,999 - INFO - Saved file 'kebo110.pdf' to database/upload/kebo110.pdf
+2025-02-14 10:15:37,999 - INFO - Sanitized filename from kebo111.pdf to kebo111.pdf
+2025-02-14 10:15:38,011 - INFO - Saved file 'kebo111.pdf' to database/upload/kebo111.pdf
+2025-02-14 10:15:38,011 - INFO - Sanitized filename from kebo112.pdf to kebo112.pdf
+2025-02-14 10:15:38,018 - INFO - Saved file 'kebo112.pdf' to database/upload/kebo112.pdf
+2025-02-14 10:15:38,018 - INFO - Sanitized filename from kebo113.pdf to kebo113.pdf
+2025-02-14 10:15:38,028 - INFO - Saved file 'kebo113.pdf' to database/upload/kebo113.pdf
+2025-02-14 10:15:38,028 - INFO - Sanitized filename from kebo114.pdf to kebo114.pdf
+2025-02-14 10:15:38,035 - INFO - Saved file 'kebo114.pdf' to database/upload/kebo114.pdf
+2025-02-14 10:15:38,035 - INFO - Sanitized filename from kebo1ps.pdf to kebo1ps.pdf
+2025-02-14 10:15:38,045 - INFO - Saved file 'kebo1ps.pdf' to database/upload/kebo1ps.pdf
+2025-02-14 10:15:38,045 - INFO - Sanitized filename from kebo101.pdf to kebo101.pdf
+2025-02-14 10:15:38,050 - INFO - Saved file 'kebo101.pdf' to database/upload/kebo101.pdf
+2025-02-14 10:15:38,050 - INFO - Sanitized filename from kebo102.pdf to kebo102.pdf
+2025-02-14 10:15:38,064 - INFO - Saved file 'kebo102.pdf' to database/upload/kebo102.pdf
+2025-02-14 10:15:38,064 - INFO - Sanitized filename from kebo103.pdf to kebo103.pdf
+2025-02-14 10:15:38,099 - INFO - Saved file 'kebo103.pdf' to database/upload/kebo103.pdf
+2025-02-14 10:15:38,099 - INFO - Sanitized filename from kebo104.pdf to kebo104.pdf
+2025-02-14 10:15:38,156 - INFO - Saved file 'kebo104.pdf' to database/upload/kebo104.pdf
+2025-02-14 10:15:38,157 - INFO - Sanitized filename from kebo105.pdf to kebo105.pdf
+2025-02-14 10:15:38,177 - INFO - Saved file 'kebo105.pdf' to database/upload/kebo105.pdf
+2025-02-14 10:15:38,179 - INFO - Loading PDFs from: database/upload/
+2025-02-14 10:15:38,180 - INFO - Processing database/upload/kebo101.pdf...
+2025-02-14 10:15:38,415 - INFO - Successfully extracted text from database/upload/kebo101.pdf
+2025-02-14 10:15:38,415 - INFO - Processing database/upload/kebo102.pdf...
+2025-02-14 10:15:40,742 - INFO - Successfully extracted text from database/upload/kebo102.pdf
+2025-02-14 10:15:40,743 - INFO - Processing database/upload/kebo103.pdf...
+2025-02-14 10:15:42,093 - INFO - Successfully extracted text from database/upload/kebo103.pdf
+2025-02-14 10:15:42,093 - INFO - Processing database/upload/kebo104.pdf...
+2025-02-14 10:15:43,201 - INFO - Successfully extracted text from database/upload/kebo104.pdf
+2025-02-14 10:15:43,201 - INFO - Processing database/upload/kebo105.pdf...
+2025-02-14 10:15:43,709 - INFO - Successfully extracted text from database/upload/kebo105.pdf
+2025-02-14 10:15:43,709 - INFO - Processing database/upload/kebo106.pdf...
+2025-02-14 10:15:43,823 - INFO - Successfully extracted text from database/upload/kebo106.pdf
+2025-02-14 10:15:43,824 - INFO - Processing database/upload/kebo107.pdf...
+2025-02-14 10:15:43,912 - INFO - Successfully extracted text from database/upload/kebo107.pdf
+2025-02-14 10:15:43,912 - INFO - Processing database/upload/kebo108.pdf...
+2025-02-14 10:15:44,964 - INFO - Successfully extracted text from database/upload/kebo108.pdf
+2025-02-14 10:15:44,964 - INFO - Processing database/upload/kebo109.pdf...
+2025-02-14 10:15:45,091 - INFO - Successfully extracted text from database/upload/kebo109.pdf
+2025-02-14 10:15:45,091 - INFO - Processing database/upload/kebo110.pdf...
+2025-02-14 10:15:45,624 - INFO - Successfully extracted text from database/upload/kebo110.pdf
+2025-02-14 10:15:45,624 - INFO - Processing database/upload/kebo111.pdf...
+2025-02-14 10:15:45,784 - INFO - Successfully extracted text from database/upload/kebo111.pdf
+2025-02-14 10:15:45,784 - INFO - Processing database/upload/kebo112.pdf...
+2025-02-14 10:15:45,859 - INFO - Successfully extracted text from database/upload/kebo112.pdf
+2025-02-14 10:15:45,859 - INFO - Processing database/upload/kebo113.pdf...
+2025-02-14 10:15:46,020 - INFO - Successfully extracted text from database/upload/kebo113.pdf
+2025-02-14 10:15:46,020 - INFO - Processing database/upload/kebo114.pdf...
+2025-02-14 10:15:46,297 - INFO - Successfully extracted text from database/upload/kebo114.pdf
+2025-02-14 10:15:46,297 - INFO - Processing database/upload/kebo115.pdf...
+2025-02-14 10:15:46,468 - INFO - Successfully extracted text from database/upload/kebo115.pdf
+2025-02-14 10:15:46,469 - INFO - Processing database/upload/kebo116.pdf...
+2025-02-14 10:15:46,670 - INFO - Successfully extracted text from database/upload/kebo116.pdf
+2025-02-14 10:15:46,670 - INFO - Processing database/upload/kebo117.pdf...
+2025-02-14 10:15:47,511 - INFO - Successfully extracted text from database/upload/kebo117.pdf
+2025-02-14 10:15:47,511 - INFO - Processing database/upload/kebo118.pdf...
+2025-02-14 10:15:48,285 - INFO - Successfully extracted text from database/upload/kebo118.pdf
+2025-02-14 10:15:48,285 - INFO - Processing database/upload/kebo119.pdf...
+2025-02-14 10:15:48,546 - INFO - Successfully extracted text from database/upload/kebo119.pdf
+2025-02-14 10:15:48,546 - INFO - Processing database/upload/kebo1ps.pdf...
+2025-02-14 10:15:48,795 - INFO - Successfully extracted text from database/upload/kebo1ps.pdf
+2025-02-14 10:16:00,561 - INFO - Stored 20 embeddings in FAISS index.
+2025-02-14 10:16:00,561 - INFO - Indexed 20 PDFs.
+2025-02-14 10:16:00,568 - INFO - FAISS index and PDF files saved to disk.
+2025-02-14 10:16:00,569 - INFO - FAISS index rebuilt after file upload.
+2025-02-14 10:16:02,624 - INFO - Processing PDF data for RAG chain...
+2025-02-14 10:16:58,492 - INFO - 127.0.0.1 - - [14/Feb/2025 10:16:58] "GET /search_pdf_page HTTP/1.1" 200 -
+2025-02-14 10:17:30,503 - INFO - Query received: STRUCTURAL ORGANISATION IN ANIMALS
+2025-02-14 10:17:31,270 - INFO - Retrieved similar PDFs for query 'STRUCTURAL ORGANISATION IN ANIMALS...': ['kebo107.pdf', 'kebo104.pdf']
+2025-02-14 10:17:31,302 - INFO - Found similar PDFs: [{'filename': 'kebo107.pdf', 'download_link': 'http://localhost:5000/download/kebo107.pdf', 'embed_link': 'http://localhost:5000/view/kebo107.pdf'}, {'filename': 'kebo104.pdf', 'download_link': 'http://localhost:5000/download/kebo104.pdf', 'embed_link': 'http://localhost:5000/view/kebo104.pdf'}]
+2025-02-14 10:17:31,319 - INFO - 127.0.0.1 - - [14/Feb/2025 10:17:31] "POST /search_pdf HTTP/1.1" 200 -
+2025-02-14 10:17:31,365 - INFO - Viewing PDF: kebo107.pdf
+2025-02-14 10:17:31,415 - INFO - 127.0.0.1 - - [14/Feb/2025 10:17:31] "GET /view/kebo107.pdf HTTP/1.1" 200 -
+2025-02-14 10:17:31,742 - INFO - Viewing PDF: kebo104.pdf
+2025-02-14 10:17:31,760 - INFO - 127.0.0.1 - - [14/Feb/2025 10:17:31] "GET /view/kebo104.pdf HTTP/1.1" 200 -
+2025-02-14 10:19:21,172 - INFO - 127.0.0.1 - - [14/Feb/2025 10:19:21] "GET / HTTP/1.1" 200 -
+2025-02-14 10:19:23,844 - INFO - 127.0.0.1 - - [14/Feb/2025 10:19:23] "GET /pdf_chat_page HTTP/1.1" 200 -
+2025-02-14 10:20:18,084 - INFO - Received a query request.
+2025-02-14 10:20:18,098 - WARNING - RAG chain or vector store is not initialized. Re-initializing...
+2025-02-14 10:20:48,529 - INFO - Use pytorch device_name: cpu
+2025-02-14 10:20:48,529 - INFO - Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2025-02-14 10:21:05,056 - INFO - Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+2025-02-14 10:21:06,573 - INFO - Successfully loaded 264 documents from database\upload
+2025-02-14 10:21:06,644 - INFO - Use pytorch device_name: cpu
+2025-02-14 10:21:06,644 - INFO - Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2025-02-14 10:21:07,139 - INFO - Successfully created conversational RAG chain.
+2025-02-14 10:21:09,271 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-14 10:21:09,287 - INFO - Successfully generated answer for the query.
+2025-02-14 10:21:09,287 - INFO - 127.0.0.1 - - [14/Feb/2025 10:21:09] "POST /query HTTP/1.1" 200 -
+2025-02-14 10:21:39,574 - INFO - Received a query request.
+2025-02-14 10:21:40,829 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-14 10:21:42,322 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-14 10:21:42,334 - INFO - Successfully generated answer for the query.
+2025-02-14 10:21:42,335 - INFO - 127.0.0.1 - - [14/Feb/2025 10:21:42] "POST /query HTTP/1.1" 200 -

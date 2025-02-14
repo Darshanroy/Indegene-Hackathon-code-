@@ -1,0 +1,8 @@
+2025-02-14 10:44:27,820 - WARNING - Hugging Face API token not found in environment.  Functionality might be limited.
+2025-02-14 10:44:27,827 - INFO - Use pytorch device_name: cpu
+2025-02-14 10:44:27,827 - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-02-14 10:44:33,718 - INFO - Loaded embedding model: all-MiniLM-L6-v2
+2025-02-14 10:44:33,720 - INFO - Loaded FAISS index and PDF files from disk.
+2025-02-14 10:44:33,802 - WARNING -  * Debugger is active!
+2025-02-14 10:44:33,856 - INFO -  * Debugger PIN: 118-960-469
+2025-02-14 10:46:22,071 - INFO -  * Detected change in 'C:\\Users\\91845\\Desktop\\indegene-hackathon\\prototype\\app.py', reloading
