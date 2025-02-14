@@ -1,0 +1,55 @@
+2025-02-12 21:30:27,571 - WARNING - Hugging Face API token not found in environment.  Functionality might be limited.
+2025-02-12 21:30:27,575 - INFO - Use pytorch device_name: cpu
+2025-02-12 21:30:27,575 - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-02-12 21:30:33,362 - INFO - Loaded embedding model: all-MiniLM-L6-v2
+2025-02-12 21:30:33,363 - INFO - Loaded FAISS index and PDF files from disk.
+2025-02-12 21:30:33,376 - WARNING -  * Debugger is active!
+2025-02-12 21:30:33,384 - INFO -  * Debugger PIN: 118-960-469
+2025-02-12 21:30:33,409 - INFO - 192.168.158.86 - - [12/Feb/2025 21:30:33] "GET / HTTP/1.1" 200 -
+2025-02-12 21:30:33,411 - INFO - 192.168.158.86 - - [12/Feb/2025 21:30:33] "GET / HTTP/1.1" 200 -
+2025-02-12 21:30:33,413 - INFO - 192.168.158.86 - - [12/Feb/2025 21:30:33] "GET / HTTP/1.1" 200 -
+2025-02-12 21:30:35,371 - INFO - 192.168.158.86 - - [12/Feb/2025 21:30:35] "GET /search_pdf_page HTTP/1.1" 200 -
+2025-02-12 21:30:43,051 - INFO - Query received: Pyspark
+2025-02-12 21:30:43,082 - INFO - Retrieved similar PDFs for query 'Pyspark...': ['pyspark.pdf', 'ImP_PLots.pdf']
+2025-02-12 21:30:43,083 - INFO - Found similar PDFs: [{'filename': 'pyspark.pdf', 'download_link': 'http://192.168.158.152:5000/download/pyspark.pdf', 'embed_link': 'http://192.168.158.152:5000/view/pyspark.pdf'}, {'filename': 'ImP_PLots.pdf', 'download_link': 'http://192.168.158.152:5000/download/ImP_PLots.pdf', 'embed_link': 'http://192.168.158.152:5000/view/ImP_PLots.pdf'}]
+2025-02-12 21:30:43,083 - INFO - 192.168.158.86 - - [12/Feb/2025 21:30:43] "POST /search_pdf HTTP/1.1" 200 -
+2025-02-12 21:30:43,151 - INFO - Viewing PDF: pyspark.pdf
+2025-02-12 21:30:43,152 - INFO - Viewing PDF: ImP_PLots.pdf
+2025-02-12 21:30:43,223 - INFO - 192.168.158.86 - - [12/Feb/2025 21:30:43] "GET /view/pyspark.pdf HTTP/1.1" 200 -
+2025-02-12 21:30:43,224 - INFO - 192.168.158.86 - - [12/Feb/2025 21:30:43] "GET /view/ImP_PLots.pdf HTTP/1.1" 200 -
+2025-02-12 21:30:45,702 - INFO - Viewing PDF: pyspark.pdf
+2025-02-12 21:30:45,704 - INFO - 192.168.158.86 - - [12/Feb/2025 21:30:45] "GET /view/pyspark.pdf HTTP/1.1" 200 -
+2025-02-12 21:30:45,776 - INFO - Viewing PDF: pyspark.pdf
+2025-02-12 21:30:45,777 - INFO - 192.168.158.86 - - [12/Feb/2025 21:30:45] "[35m[1mGET /view/pyspark.pdf HTTP/1.1[0m" 206 -
+2025-02-12 21:30:45,849 - INFO - Viewing PDF: pyspark.pdf
+2025-02-12 21:30:45,850 - INFO - 192.168.158.86 - - [12/Feb/2025 21:30:45] "[35m[1mGET /view/pyspark.pdf HTTP/1.1[0m" 206 -
+2025-02-12 21:30:54,033 - INFO - Viewing PDF: pyspark.pdf
+2025-02-12 21:30:54,035 - INFO - 192.168.158.86 - - [12/Feb/2025 21:30:54] "[35m[1mGET /view/pyspark.pdf HTTP/1.1[0m" 206 -
+2025-02-12 21:30:54,051 - INFO - Viewing PDF: pyspark.pdf
+2025-02-12 21:30:54,052 - INFO - 192.168.158.86 - - [12/Feb/2025 21:30:54] "[35m[1mGET /view/pyspark.pdf HTTP/1.1[0m" 206 -
+2025-02-12 21:30:54,061 - INFO - Viewing PDF: pyspark.pdf
+2025-02-12 21:30:54,062 - INFO - 192.168.158.86 - - [12/Feb/2025 21:30:54] "[35m[1mGET /view/pyspark.pdf HTTP/1.1[0m" 206 -
+2025-02-12 21:30:54,159 - INFO - Viewing PDF: pyspark.pdf
+2025-02-12 21:30:54,161 - INFO - 192.168.158.86 - - [12/Feb/2025 21:30:54] "[35m[1mGET /view/pyspark.pdf HTTP/1.1[0m" 206 -
+2025-02-12 21:30:56,060 - INFO - Downloading PDF: pyspark.pdf
+2025-02-12 21:30:56,062 - INFO - 192.168.158.86 - - [12/Feb/2025 21:30:56] "GET /download/pyspark.pdf HTTP/1.1" 200 -
+2025-02-12 21:30:56,128 - INFO - Downloading PDF: pyspark.pdf
+2025-02-12 21:30:56,129 - INFO - Downloading PDF: pyspark.pdf
+2025-02-12 21:30:56,130 - INFO - 192.168.158.86 - - [12/Feb/2025 21:30:56] "[35m[1mGET /download/pyspark.pdf HTTP/1.1[0m" 206 -
+2025-02-12 21:30:56,131 - INFO - 192.168.158.86 - - [12/Feb/2025 21:30:56] "[35m[1mGET /download/pyspark.pdf HTTP/1.1[0m" 206 -
+2025-02-12 21:34:20,066 - INFO - 192.168.158.86 - - [12/Feb/2025 21:34:20] "GET / HTTP/1.1" 200 -
+2025-02-12 22:09:18,355 - INFO - 192.168.158.230 - - [12/Feb/2025 22:09:18] "GET / HTTP/1.1" 200 -
+2025-02-12 22:09:22,191 - INFO - 192.168.158.230 - - [12/Feb/2025 22:09:22] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-02-12 22:09:56,883 - INFO - 192.168.158.230 - - [12/Feb/2025 22:09:56] "GET /search_pdf_page HTTP/1.1" 200 -
+2025-02-12 22:10:08,586 - INFO - Query received: Pyspark
+2025-02-12 22:10:08,605 - INFO - Retrieved similar PDFs for query 'Pyspark...': ['pyspark.pdf', 'ImP_PLots.pdf']
+2025-02-12 22:10:08,605 - INFO - Found similar PDFs: [{'filename': 'pyspark.pdf', 'download_link': 'http://192.168.158.152:5000/download/pyspark.pdf', 'embed_link': 'http://192.168.158.152:5000/view/pyspark.pdf'}, {'filename': 'ImP_PLots.pdf', 'download_link': 'http://192.168.158.152:5000/download/ImP_PLots.pdf', 'embed_link': 'http://192.168.158.152:5000/view/ImP_PLots.pdf'}]
+2025-02-12 22:10:08,606 - INFO - 192.168.158.230 - - [12/Feb/2025 22:10:08] "POST /search_pdf HTTP/1.1" 200 -
+2025-02-12 22:10:08,983 - INFO - Viewing PDF: pyspark.pdf
+2025-02-12 22:10:08,985 - INFO - 192.168.158.230 - - [12/Feb/2025 22:10:08] "GET /view/pyspark.pdf HTTP/1.1" 200 -
+2025-02-12 22:10:09,146 - INFO - Viewing PDF: ImP_PLots.pdf
+2025-02-12 22:10:09,149 - INFO - 192.168.158.230 - - [12/Feb/2025 22:10:09] "GET /view/ImP_PLots.pdf HTTP/1.1" 200 -
+2025-02-12 22:10:34,152 - INFO - 192.168.158.230 - - [12/Feb/2025 22:10:34] "GET /search_pdf_page HTTP/1.1" 200 -
+2025-02-12 22:10:36,646 - INFO - 192.168.158.230 - - [12/Feb/2025 22:10:36] "GET / HTTP/1.1" 200 -
+2025-02-13 19:18:52,425 - INFO - 127.0.0.1 - - [13/Feb/2025 19:18:52] "GET /pdf_chat_page HTTP/1.1" 200 -
+2025-02-13 19:18:55,534 - INFO - 127.0.0.1 - - [13/Feb/2025 19:18:55] "GET / HTTP/1.1" 200 -

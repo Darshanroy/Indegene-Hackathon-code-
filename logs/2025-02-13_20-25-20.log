@@ -1,0 +1,25 @@
+2025-02-13 20:25:20,406 - WARNING - Hugging Face API token not found in environment.  Functionality might be limited.
+2025-02-13 20:25:20,410 - INFO - Use pytorch device_name: cpu
+2025-02-13 20:25:20,410 - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-02-13 20:25:26,834 - INFO - Loaded embedding model: all-MiniLM-L6-v2
+2025-02-13 20:25:26,836 - INFO - Loaded FAISS index and PDF files from disk.
+2025-02-13 20:25:26,858 - WARNING -  * Debugger is active!
+2025-02-13 20:25:26,908 - INFO -  * Debugger PIN: 118-960-469
+2025-02-13 20:26:22,721 - INFO - 127.0.0.1 - - [13/Feb/2025 20:26:22] "GET / HTTP/1.1" 200 -
+2025-02-13 20:37:05,921 - INFO - 127.0.0.1 - - [13/Feb/2025 20:37:05] "GET /search_pdf_page HTTP/1.1" 200 -
+2025-02-13 20:37:20,096 - INFO - Query received: pypsark
+2025-02-13 20:37:20,557 - INFO - Retrieved similar PDFs for query 'pypsark...': ['Darshan_Kumar_R_-_Internship_Certificate.pdf', 'Timetable - Google Sheets.pdf']
+2025-02-13 20:37:20,558 - INFO - Found similar PDFs: [{'filename': 'Darshan_Kumar_R_-_Internship_Certificate.pdf', 'download_link': 'http://127.0.0.1:5000/download/Darshan_Kumar_R_-_Internship_Certificate.pdf', 'embed_link': 'http://127.0.0.1:5000/view/Darshan_Kumar_R_-_Internship_Certificate.pdf'}, {'filename': 'Timetable - Google Sheets.pdf', 'download_link': 'http://127.0.0.1:5000/download/Timetable%20-%20Google%20Sheets.pdf', 'embed_link': 'http://127.0.0.1:5000/view/Timetable%20-%20Google%20Sheets.pdf'}]
+2025-02-13 20:37:20,560 - INFO - 127.0.0.1 - - [13/Feb/2025 20:37:20] "POST /search_pdf HTTP/1.1" 200 -
+2025-02-13 20:37:20,578 - INFO - Viewing PDF: Darshan_Kumar_R_-_Internship_Certificate.pdf
+2025-02-13 20:37:20,583 - INFO - Viewing PDF: Timetable - Google Sheets.pdf
+2025-02-13 20:37:20,867 - INFO - 127.0.0.1 - - [13/Feb/2025 20:37:20] "GET /view/Timetable%20-%20Google%20Sheets.pdf HTTP/1.1" 200 -
+2025-02-13 20:37:20,869 - INFO - 127.0.0.1 - - [13/Feb/2025 20:37:20] "GET /view/Darshan_Kumar_R_-_Internship_Certificate.pdf HTTP/1.1" 200 -
+2025-02-13 20:37:31,949 - INFO - Query received: Drashankumar
+2025-02-13 20:37:32,024 - INFO - Retrieved similar PDFs for query 'Drashankumar...': ['Darshan_Kumar_R_-_Internship_Certificate.pdf', 'SQL_cheatsheet.pdf']
+2025-02-13 20:37:32,025 - INFO - Found similar PDFs: [{'filename': 'Darshan_Kumar_R_-_Internship_Certificate.pdf', 'download_link': 'http://127.0.0.1:5000/download/Darshan_Kumar_R_-_Internship_Certificate.pdf', 'embed_link': 'http://127.0.0.1:5000/view/Darshan_Kumar_R_-_Internship_Certificate.pdf'}, {'filename': 'SQL_cheatsheet.pdf', 'download_link': 'http://127.0.0.1:5000/download/SQL_cheatsheet.pdf', 'embed_link': 'http://127.0.0.1:5000/view/SQL_cheatsheet.pdf'}]
+2025-02-13 20:37:32,026 - INFO - 127.0.0.1 - - [13/Feb/2025 20:37:32] "POST /search_pdf HTTP/1.1" 200 -
+2025-02-13 20:37:32,072 - INFO - Viewing PDF: SQL_cheatsheet.pdf
+2025-02-13 20:37:32,074 - INFO - Viewing PDF: Darshan_Kumar_R_-_Internship_Certificate.pdf
+2025-02-13 20:37:32,077 - INFO - 127.0.0.1 - - [13/Feb/2025 20:37:32] "[36mGET /view/Darshan_Kumar_R_-_Internship_Certificate.pdf HTTP/1.1[0m" 304 -
+2025-02-13 20:37:32,111 - INFO - 127.0.0.1 - - [13/Feb/2025 20:37:32] "GET /view/SQL_cheatsheet.pdf HTTP/1.1" 200 -

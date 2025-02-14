@@ -258,6 +258,6 @@ if __name__ == '__main__':
 
     # --- Run App ---
     try:
-        app.run(debug=True)
+        app.run(host='0.0.0.0', port=5000, debug=True)
     except Exception as e:
         logging.exception("Application failed to start: {}".format(e))

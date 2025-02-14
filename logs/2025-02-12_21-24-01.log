@@ -1,0 +1,106 @@
+2025-02-12 21:24:01,470 - WARNING - Hugging Face API token not found in environment.  Functionality might be limited.
+2025-02-12 21:24:01,475 - INFO - Use pytorch device_name: cpu
+2025-02-12 21:24:01,475 - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-02-12 21:24:06,792 - INFO - Loaded embedding model: all-MiniLM-L6-v2
+2025-02-12 21:24:06,794 - INFO - Loaded FAISS index and PDF files from disk.
+2025-02-12 21:24:06,810 - WARNING -  * Debugger is active!
+2025-02-12 21:24:06,823 - INFO -  * Debugger PIN: 118-960-469
+2025-02-12 21:24:06,862 - INFO - 127.0.0.1 - - [12/Feb/2025 21:24:06] "GET / HTTP/1.1" 200 -
+2025-02-12 21:24:06,863 - INFO - 127.0.0.1 - - [12/Feb/2025 21:24:06] "GET / HTTP/1.1" 200 -
+2025-02-12 21:24:34,584 - INFO - 192.168.158.86 - - [12/Feb/2025 21:24:34] "GET / HTTP/1.1" 200 -
+2025-02-12 21:24:35,266 - INFO - 192.168.158.86 - - [12/Feb/2025 21:24:35] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-02-12 21:24:37,999 - INFO - 192.168.158.86 - - [12/Feb/2025 21:24:37] "GET /search_pdf_page HTTP/1.1" 200 -
+2025-02-12 21:24:42,798 - INFO - Received a query request.
+2025-02-12 21:24:42,798 - WARNING - RAG chain or vector store is not initialized. Re-initializing...
+2025-02-12 21:24:44,147 - INFO - Use pytorch device_name: cpu
+2025-02-12 21:24:44,147 - INFO - Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2025-02-12 21:24:49,495 - INFO - Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+2025-02-12 21:24:49,973 - INFO - Successfully created conversational RAG chain.
+2025-02-12 21:24:51,903 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-12 21:24:51,923 - INFO - Successfully generated answer for the query.
+2025-02-12 21:24:51,924 - INFO - 192.168.158.86 - - [12/Feb/2025 21:24:51] "POST /query HTTP/1.1" 200 -
+2025-02-12 21:25:02,269 - INFO - Received a query request.
+2025-02-12 21:25:03,178 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-12 21:25:04,684 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-12 21:25:04,690 - INFO - Successfully generated answer for the query.
+2025-02-12 21:25:04,690 - INFO - 192.168.158.86 - - [12/Feb/2025 21:25:04] "POST /query HTTP/1.1" 200 -
+2025-02-12 21:25:11,285 - INFO - 192.168.158.86 - - [12/Feb/2025 21:25:11] "GET / HTTP/1.1" 200 -
+2025-02-12 21:25:16,865 - INFO - Sanitized filename from Darshan Kumar R - Internship Certificate.pdf to Darshan_Kumar_R_-_Internship_Certificate.pdf
+2025-02-12 21:25:16,868 - INFO - Saved file 'Darshan_Kumar_R_-_Internship_Certificate.pdf' to database/upload/Darshan_Kumar_R_-_Internship_Certificate.pdf
+2025-02-12 21:25:16,868 - INFO - Loading PDFs from: database/upload/
+2025-02-12 21:25:16,869 - INFO - Processing database/upload/APPLICATION OF LLMS.pdf...
+2025-02-12 21:25:17,076 - INFO - Successfully extracted text from database/upload/APPLICATION OF LLMS.pdf
+2025-02-12 21:25:17,077 - INFO - Processing database/upload/Darshan_Kumar_R_-_Internship_Certificate.pdf...
+2025-02-12 21:25:17,096 - INFO - Successfully extracted text from database/upload/Darshan_Kumar_R_-_Internship_Certificate.pdf
+2025-02-12 21:25:17,096 - INFO - Processing database/upload/Data Collection.pdf...
+2025-02-12 21:25:17,171 - INFO - Successfully extracted text from database/upload/Data Collection.pdf
+2025-02-12 21:25:17,171 - INFO - Processing database/upload/DS_Interview_GUIDE.pdf...
+2025-02-12 21:25:17,373 - INFO - Successfully extracted text from database/upload/DS_Interview_GUIDE.pdf
+2025-02-12 21:25:17,373 - INFO - Processing database/upload/ImP_PLots.pdf...
+2025-02-12 21:25:17,380 - INFO - Successfully extracted text from database/upload/ImP_PLots.pdf
+2025-02-12 21:25:17,380 - INFO - Processing database/upload/kUBERNETES.pdf...
+2025-02-12 21:25:17,614 - INFO - Successfully extracted text from database/upload/kUBERNETES.pdf
+2025-02-12 21:25:17,614 - INFO - Processing database/upload/LLMS.pdf...
+2025-02-12 21:25:18,000 - INFO - Successfully extracted text from database/upload/LLMS.pdf
+2025-02-12 21:25:18,000 - INFO - Processing database/upload/Natural Language Processing with Transformers Building Language Applications with Hugging Face by Lewis Tunstall  Leandro von Werra  Thomas Wolf.pdf...
+2025-02-12 21:25:18,616 - INFO - Successfully extracted text from database/upload/Natural Language Processing with Transformers Building Language Applications with Hugging Face by Lewis Tunstall  Leandro von Werra  Thomas Wolf.pdf
+2025-02-12 21:25:18,617 - INFO - Processing database/upload/pyspark.pdf...
+2025-02-12 21:25:19,568 - INFO - Successfully extracted text from database/upload/pyspark.pdf
+2025-02-12 21:25:19,568 - INFO - Processing database/upload/SQL_cheatsheet.pdf...
+2025-02-12 21:25:19,633 - INFO - Successfully extracted text from database/upload/SQL_cheatsheet.pdf
+2025-02-12 21:25:19,633 - INFO - Processing database/upload/Timetable - Google Sheets.pdf...
+2025-02-12 21:25:19,636 - INFO - Successfully extracted text from database/upload/Timetable - Google Sheets.pdf
+2025-02-12 21:25:27,648 - INFO - Stored 11 embeddings in FAISS index.
+2025-02-12 21:25:27,648 - INFO - Indexed 11 PDFs.
+2025-02-12 21:25:27,650 - INFO - FAISS index and PDF files saved to disk.
+2025-02-12 21:25:27,651 - INFO - FAISS index rebuilt after file upload.
+2025-02-12 21:25:27,655 - INFO - Processing PDF data for RAG chain...
+2025-02-12 21:26:29,219 - INFO - Successfully loaded 1532 documents from database\upload
+2025-02-12 21:26:29,389 - INFO - Use pytorch device_name: cpu
+2025-02-12 21:26:29,389 - INFO - Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2025-02-12 21:27:14,572 - INFO - Sanitized filename from Darshan Kumar R - Internship Certificate.pdf to Darshan_Kumar_R_-_Internship_Certificate.pdf
+2025-02-12 21:27:14,575 - INFO - Saved file 'Darshan_Kumar_R_-_Internship_Certificate.pdf' to database/upload/Darshan_Kumar_R_-_Internship_Certificate.pdf
+2025-02-12 21:27:14,575 - INFO - Loading PDFs from: database/upload/
+2025-02-12 21:27:14,576 - INFO - Processing database/upload/APPLICATION OF LLMS.pdf...
+2025-02-12 21:27:15,220 - INFO - Successfully extracted text from database/upload/APPLICATION OF LLMS.pdf
+2025-02-12 21:27:15,220 - INFO - Processing database/upload/Darshan_Kumar_R_-_Internship_Certificate.pdf...
+2025-02-12 21:27:15,269 - INFO - Successfully extracted text from database/upload/Darshan_Kumar_R_-_Internship_Certificate.pdf
+2025-02-12 21:27:15,269 - INFO - Processing database/upload/Data Collection.pdf...
+2025-02-12 21:27:15,475 - INFO - Successfully extracted text from database/upload/Data Collection.pdf
+2025-02-12 21:27:15,475 - INFO - Processing database/upload/DS_Interview_GUIDE.pdf...
+2025-02-12 21:27:16,125 - INFO - Successfully extracted text from database/upload/DS_Interview_GUIDE.pdf
+2025-02-12 21:27:16,125 - INFO - Processing database/upload/ImP_PLots.pdf...
+2025-02-12 21:27:16,150 - INFO - Successfully extracted text from database/upload/ImP_PLots.pdf
+2025-02-12 21:27:16,151 - INFO - Processing database/upload/kUBERNETES.pdf...
+2025-02-12 21:27:16,848 - INFO - Successfully extracted text from database/upload/kUBERNETES.pdf
+2025-02-12 21:27:16,848 - INFO - Processing database/upload/LLMS.pdf...
+2025-02-12 21:27:17,871 - INFO - Successfully extracted text from database/upload/LLMS.pdf
+2025-02-12 21:27:17,871 - INFO - Processing database/upload/Natural Language Processing with Transformers Building Language Applications with Hugging Face by Lewis Tunstall  Leandro von Werra  Thomas Wolf.pdf...
+2025-02-12 21:27:19,969 - INFO - Successfully extracted text from database/upload/Natural Language Processing with Transformers Building Language Applications with Hugging Face by Lewis Tunstall  Leandro von Werra  Thomas Wolf.pdf
+2025-02-12 21:27:19,969 - INFO - Processing database/upload/pyspark.pdf...
+2025-02-12 21:27:23,060 - INFO - Successfully extracted text from database/upload/pyspark.pdf
+2025-02-12 21:27:23,061 - INFO - Processing database/upload/SQL_cheatsheet.pdf...
+2025-02-12 21:27:23,235 - INFO - Successfully extracted text from database/upload/SQL_cheatsheet.pdf
+2025-02-12 21:27:23,236 - INFO - Processing database/upload/Timetable - Google Sheets.pdf...
+2025-02-12 21:27:23,243 - INFO - Successfully extracted text from database/upload/Timetable - Google Sheets.pdf
+2025-02-12 21:27:35,965 - INFO - 192.168.158.86 - - [12/Feb/2025 21:27:35] "GET /pdf_chat_page HTTP/1.1" 200 -
+2025-02-12 21:27:40,651 - INFO - 192.168.158.86 - - [12/Feb/2025 21:27:40] "GET / HTTP/1.1" 200 -
+2025-02-12 21:27:42,081 - INFO - 192.168.158.86 - - [12/Feb/2025 21:27:42] "GET /search_pdf_page HTTP/1.1" 200 -
+2025-02-12 21:27:46,018 - INFO - Received a query request.
+2025-02-12 21:27:46,018 - WARNING - RAG chain or vector store is not initialized. Re-initializing...
+2025-02-12 21:27:49,217 - INFO - Use pytorch device_name: cpu
+2025-02-12 21:27:49,218 - INFO - Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2025-02-12 21:27:51,850 - INFO - 192.168.158.86 - - [12/Feb/2025 21:27:51] "GET / HTTP/1.1" 200 -
+2025-02-12 21:27:53,453 - INFO - 192.168.158.86 - - [12/Feb/2025 21:27:53] "GET /search_pdf_page HTTP/1.1" 200 -
+2025-02-12 21:27:57,545 - INFO - Successfully created conversational RAG chain.
+2025-02-12 21:27:58,389 - INFO - 192.168.158.86 - - [12/Feb/2025 21:27:58] "GET /pdf_chat_page HTTP/1.1" 200 -
+2025-02-12 21:27:59,237 - INFO - Stored 11 embeddings in FAISS index.
+2025-02-12 21:27:59,237 - INFO - Indexed 11 PDFs.
+2025-02-12 21:27:59,241 - INFO - FAISS index and PDF files saved to disk.
+2025-02-12 21:27:59,254 - INFO - FAISS index rebuilt after file upload.
+2025-02-12 21:27:59,265 - INFO - Processing PDF data for RAG chain...
+2025-02-12 21:27:59,629 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-02-12 21:27:59,705 - INFO - Successfully generated answer for the query.
+2025-02-12 21:27:59,707 - INFO - 192.168.158.86 - - [12/Feb/2025 21:27:59] "POST /query HTTP/1.1" 200 -
+2025-02-12 21:29:32,884 - INFO - 192.168.158.86 - - [12/Feb/2025 21:29:32] "GET / HTTP/1.1" 200 -
+2025-02-12 21:29:35,131 - INFO - 192.168.158.86 - - [12/Feb/2025 21:29:35] "GET /search_pdf_page HTTP/1.1" 200 -

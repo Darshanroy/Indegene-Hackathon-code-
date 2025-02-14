@@ -6,17 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="e7ec3e59-96dd-4fa0-aac2-577037332b52" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/indexing/chroma_langchain_db/chroma.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/database/indexing/chroma_langchain_db/chroma.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/indexing/chroma_langchain_db/dd953da3-2b98-476b-bbb5-750c6182cffa/data_level0.bin" beforeDir="false" afterPath="$PROJECT_DIR$/database/indexing/chroma_langchain_db/dd953da3-2b98-476b-bbb5-750c6182cffa/data_level0.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/indexing/chroma_langchain_db/dd953da3-2b98-476b-bbb5-750c6182cffa/header.bin" beforeDir="false" afterPath="$PROJECT_DIR$/database/indexing/chroma_langchain_db/dd953da3-2b98-476b-bbb5-750c6182cffa/header.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/indexing/chroma_langchain_db/dd953da3-2b98-476b-bbb5-750c6182cffa/index_metadata.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/database/indexing/chroma_langchain_db/dd953da3-2b98-476b-bbb5-750c6182cffa/index_metadata.pickle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/indexing/chroma_langchain_db/dd953da3-2b98-476b-bbb5-750c6182cffa/length.bin" beforeDir="false" afterPath="$PROJECT_DIR$/database/indexing/chroma_langchain_db/dd953da3-2b98-476b-bbb5-750c6182cffa/length.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/indexing/chroma_langchain_db/dd953da3-2b98-476b-bbb5-750c6182cffa/link_lists.bin" beforeDir="false" afterPath="$PROJECT_DIR$/database/indexing/chroma_langchain_db/dd953da3-2b98-476b-bbb5-750c6182cffa/link_lists.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/indexing/faiss_index.bin" beforeDir="false" afterPath="$PROJECT_DIR$/database/indexing/faiss_index.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/indexing/pdf_files.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/database/indexing/pdf_files.pkl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/2025-02-12_19-52-00.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/2025-02-12_19-52-00.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/pdf_chat_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pdf_chat_page.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/search_pdf.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/search_pdf.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -46,14 +38,14 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "Python.main.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\91845\Desktop\indegene-hackathon\prototype\templates" />
